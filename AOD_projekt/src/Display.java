@@ -7,7 +7,7 @@ public class Display {
 	
 	private JFrame frame;
 	private Canvas canvas;
-	private int width = 300, height = 300;
+	private int width = 600, height = 600;
 	
 	public Display() {
 		

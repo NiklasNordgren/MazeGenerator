@@ -19,9 +19,11 @@ public class Maze {
 
 	private Random random;
 
-	private int mazeWidth = 10;
-	private int mazeHeight = 10;
-
+	private int mazeWidth = 20;
+	private int mazeHeight = 20;
+	
+	private int startX, startY;
+	
 	public Maze(Game game) {
 		this.game = game;
 
@@ -31,8 +33,8 @@ public class Maze {
 
 		stack = new Stack<Cell>();
 
-		int startX = random.nextInt(cells.length);
-		int startY = random.nextInt(cells[0].length);
+		startX = random.nextInt(cells.length);
+		startY = random.nextInt(cells[0].length);
 
 		createMaze(cells[startX][startY]);
 
@@ -87,26 +89,24 @@ public class Maze {
 		int ncX = nc.getX();
 		int ncY = nc.getY();
 
-		if(ccX - ncX == 1) {
-			//Remove east wall
-			cc.walls[3] = 0;
-			nc.walls[2] = 0;
-		}
 		if(ccY - ncY == 1) {
-			//Remove top wall
 			cc.walls[0] = 0;
 			nc.walls[1] = 0;
-
 		}
-		if(ccX - ncX == -1) {
-			//Remove west wall
+
+		if(ccY - ncY == -1) {
+			cc.walls[1] = 0;
+			nc.walls[0] = 0;
+		}
+
+		if(ccX - ncX == 1) {
 			cc.walls[2] = 0;
 			nc.walls[3] = 0;
 		}
-		if(ccY - ncY == -1) {
-			//Remove bottom wall
-			cc.walls[1] = 0;
-			nc.walls[0] = 0;
+		
+		if(ccX - ncX == -1) {
+			cc.walls[3] = 0;
+			nc.walls[2] = 0;
 		}
 
 	}
@@ -194,7 +194,7 @@ public class Maze {
 		//Fill next
 		g.setColor(Color.GREEN);
 		nextCell.fillCell(g);
-		*/
+		 */
 
 
 

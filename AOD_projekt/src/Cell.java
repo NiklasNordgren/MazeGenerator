@@ -19,11 +19,11 @@ public class Cell {
 
 	public void drawWalls(Graphics g) {
 
-		//Top
+		//North
 		if(walls[0] == 1)
 		g.drawLine(xPixels, yPixels, xPixels+CELLSIZE-3, yPixels);
 
-		//Bottom
+		//South
 		if(walls[1] == 1)
 		g.drawLine(xPixels, yPixels + CELLSIZE, xPixels + CELLSIZE - 3, yPixels + CELLSIZE);
 
