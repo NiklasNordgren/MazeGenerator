@@ -79,8 +79,6 @@ public class Maze {
 			removeWallBetween(currentCell, nextCell);
 		}
 
-
-
 		createMaze(nextCell);
 
 	}

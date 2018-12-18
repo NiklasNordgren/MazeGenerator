@@ -34,7 +34,11 @@ public class Cell {
 
 		//East
 		if(walls[3] == 1)
+<<<<<<< HEAD
 		g.drawLine(xPixels + CELLSIZE , yPixels, xPixels + CELLSIZE , yPixels + CELLSIZE);
+=======
+		g.drawLine(xPixels + CELLSIZE , yPixels , xPixels + CELLSIZE , yPixels + CELLSIZE);
+>>>>>>> 3434caecfbf9d72f0851d185229ee2cf78490e5e
 	}
 	
 	public void fillCell(Graphics g) {
