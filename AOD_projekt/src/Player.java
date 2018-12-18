@@ -18,7 +18,7 @@ public class Player {
 	}
 
 	public void render(Graphics g) {
-		g.setColor(Color.ORANGE);
+		g.setColor(Color.RED);
 		g.fillOval(xPos, yPos, size, size);
 	}
 
