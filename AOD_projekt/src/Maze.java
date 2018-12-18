@@ -16,6 +16,8 @@ public class Maze {
 	private Cell goalCell;
 
 	private Stack<Cell> stack;
+	private Stack<Cell> path;
+	private ArrayList<Cell> solutionPath;
 
 	private boolean goalIsFound;
 
@@ -39,9 +41,8 @@ public class Maze {
 		startCell = cells[0][0];
 
 		goalCell = cells[cells.length-1][cells[0].length-1];
-		
+	
 		createMaze(startCell);
-
 	}
 
 	private void initializeCells() {
@@ -57,33 +58,24 @@ public class Maze {
 		//Abort if every cell is visited.
 		if(isAllVisited())
 			return;
-
+		if(currentCell.equals(goalCell) && !goalIsFound)
+			goalIsFound = true;
 
 		currentCell.setVisited(true);
 		neighbours = findNeighbours(currentCell);
-
-		//om vi har hittat målet - abort
-		if(currentCell == goalCell) {
-
-			goalIsFound = true;
-		}
-
 
 		if(neighbours.size() == 0) {
 			nextCell = stack.pop();
 			if(!goalIsFound)
 				currentCell.setSolution(false);
-
-
-		}else { 
+    }else{
 			nextCell = selectRandomNeighbour(neighbours);
-			stack.push(currentCell);
+      stack.push(currentCell);
 			if(!goalIsFound)
 				currentCell.setSolution(true);
-
+      
 			removeWallBetween(currentCell, nextCell);
 		}
-
 		createMaze(nextCell);
 
 	}
@@ -98,7 +90,6 @@ public class Maze {
 
 
 	private void removeWallBetween(Cell cc, Cell nc) {
-
 
 		int ccX = cc.getX();
 		int ccY = cc.getY();
@@ -173,6 +164,7 @@ public class Maze {
 
 	}
 
+
 	public void drawSolutionPath(Graphics g) {
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++) {
@@ -211,6 +203,15 @@ public class Maze {
 			}
 		 */
 
+	public void render(Graphics g) {
+
+		//Draw walls
+		for(int x = 0; x < cells.length; x++)
+			for(int y = 0; y < cells[x].length; y++)
+				cells[x][y].drawWalls(g);
+
+
+
 		//Neighbour test
 
 		/*
@@ -219,6 +220,10 @@ public class Maze {
 			neighbours.get(i).fillCell(g);
 		}
 		 */
+
+		//Fill goal
+		g.setColor(Color.blue);
+		goalCell.fillCellGoal(g);
 
 	}
 }

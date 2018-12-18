@@ -27,6 +27,7 @@ public class Display {
 		canvas.setMinimumSize(dimension);
 		canvas.setMaximumSize(dimension);
 		canvas.setFocusable(false);
+
 		canvas.setBackground(Color.WHITE);
 		
 		
