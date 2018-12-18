@@ -1,8 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.Random;
 import java.util.Stack;
 
@@ -11,16 +9,16 @@ public class Maze {
 	private Game game;
 
 	public static Cell[][] cells;
-	
-	private Queue<Cell> solutionQueue;
 
 	private Cell currentCell;
 	private Cell nextCell;
 
 	private Cell goalCell;
-
+	private Cell startCell;
 
 	private Stack<Cell> stack;
+	private Stack<Cell> path;
+	private ArrayList<Cell> solutionPath;
 
 	private ArrayList<Cell> neighbours;
 
@@ -29,7 +27,7 @@ public class Maze {
 	private int mazeWidth = 20;
 	private int mazeHeight = 20;
 
-	//private int startX, startY;
+	private boolean goalIsFound;
 
 	public Maze(Game game) {
 		this.game = game;
@@ -39,14 +37,14 @@ public class Maze {
 		initializeCells();
 
 		stack = new Stack<Cell>();
-		
-		//startX = random.nextInt(cells.length);
-		//startY = random.nextInt(cells[0].length);
+		path = new Stack<Cell>();
+		solutionPath = new ArrayList<Cell>();
 
 		goalCell = cells[cells.length-1][cells[0].length-1];
 
-		createMaze(goalCell);
+		startCell = cells[0][0];
 
+		createMaze(startCell);
 	}
 
 	private void initializeCells() {
@@ -61,28 +59,30 @@ public class Maze {
 
 		if(isAllVisited())
 			return;
+		if(currentCell.equals(goalCell) && !goalIsFound)
+			goalIsFound = true;
 
 		this.currentCell = currentCell;
 		currentCell.setVisited(true);
 		neighbours = findNeighbours(currentCell);
 
-
 		if(neighbours.size() == 0) {
+			if(!goalIsFound)
+				nextCell.setSolution(false);
 			nextCell = stack.pop();
-		}else { 
+		}else {
 			nextCell = selectRandomNeighbour(neighbours);
+			if(!goalIsFound)
+				nextCell.setSolution(true);
+
 			stack.push(currentCell);
 			removeWallBetween(currentCell, nextCell);
 		}
 
+
+
 		createMaze(nextCell);
 
-	}
-	
-	private void mazeSolver(Cell current) {
-		
-		
-		
 	}
 
 	private boolean isAllVisited() {
@@ -95,7 +95,6 @@ public class Maze {
 
 
 	private void removeWallBetween(Cell cc, Cell nc) {
-
 
 		int ccX = cc.getX();
 		int ccY = cc.getY();
@@ -177,21 +176,15 @@ public class Maze {
 			for(int y = 0; y < cells[x].length; y++)
 				cells[x][y].drawWalls(g);
 
-		
-	
-
-
-
-		/*
 
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++) {
-				if(cells[x][y].getIsVisited()) {
-					g.setColor(Color.RED);
+				if(cells[x][y].isSolution()) {
+					g.setColor(Color.MAGENTA);
 					cells[x][y].fillCell(g);
 				}
 			}
-		 */
+
 
 		//Neighbour test
 
@@ -202,7 +195,13 @@ public class Maze {
 		}
 		 */
 
-		//Fill current
+
+
+		//Fill start
+		g.setColor(Color.GREEN);
+		startCell.fillCellGoal(g);
+
+		//Fill goal
 		g.setColor(Color.blue);
 		goalCell.fillCellGoal(g);
 

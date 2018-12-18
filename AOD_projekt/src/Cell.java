@@ -38,7 +38,7 @@ public class Cell {
 	}
 	
 	public void fillCell(Graphics g) {
-		g.fillRect(xPixels, yPixels, CELLSIZE, CELLSIZE);
+		g.fillOval(xPixels, yPixels, CELLSIZE, CELLSIZE);
 	}
 	
 	public void fillCellGoal(Graphics g) {
