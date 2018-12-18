@@ -22,19 +22,19 @@ public class Cell {
 
 		//North
 		if(walls[0] == 1)
-		g.drawLine(xPixels, yPixels, xPixels+CELLSIZE-3, yPixels);
+		g.drawLine(xPixels, yPixels, xPixels+CELLSIZE, yPixels);
 
 		//South
 		if(walls[1] == 1)
-		g.drawLine(xPixels, yPixels + CELLSIZE, xPixels + CELLSIZE - 3, yPixels + CELLSIZE);
+		g.drawLine(xPixels, yPixels + CELLSIZE, xPixels + CELLSIZE, yPixels + CELLSIZE);
 
 		//West
 		if(walls[2] == 1)
-		g.drawLine(xPixels, yPixels+3, xPixels, yPixels + CELLSIZE-3);
+		g.drawLine(xPixels, yPixels, xPixels, yPixels + CELLSIZE);
 
 		//East
 		if(walls[3] == 1)
-		g.drawLine(xPixels + CELLSIZE , yPixels+3 , xPixels + CELLSIZE , yPixels + CELLSIZE-3);
+		g.drawLine(xPixels + CELLSIZE , yPixels, xPixels + CELLSIZE , yPixels + CELLSIZE);
 	}
 	
 	public void fillCell(Graphics g) {

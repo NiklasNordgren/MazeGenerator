@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Random;
 import java.util.Stack;
 
@@ -9,6 +11,8 @@ public class Maze {
 	private Game game;
 
 	public static Cell[][] cells;
+	
+	private Queue<Cell> solutionQueue;
 
 	private Cell currentCell;
 	private Cell nextCell;
@@ -35,6 +39,8 @@ public class Maze {
 		initializeCells();
 
 		stack = new Stack<Cell>();
+		
+		
 
 		//startX = random.nextInt(cells.length);
 		//startY = random.nextInt(cells[0].length);
@@ -174,14 +180,7 @@ public class Maze {
 				cells[x][y].drawWalls(g);
 
 		
-		for(int x = 0; x < cells.length; x++)
-			for(int y = 0; y < cells[x].length; y++) {
-				if(cells[x][y].isSolution()) {
-					g.setColor(Color.BLACK);
-					cells[x][y].fillCell(g);
-				}
-			}
-		 
+	
 
 
 
