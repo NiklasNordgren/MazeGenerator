@@ -17,8 +17,6 @@ public class Maze {
 	private Cell startCell;
 
 	private Stack<Cell> stack;
-	private Stack<Cell> path;
-	private ArrayList<Cell> solutionPath;
 
 	private ArrayList<Cell> neighbours;
 
@@ -37,8 +35,6 @@ public class Maze {
 		initializeCells();
 
 		stack = new Stack<Cell>();
-		path = new Stack<Cell>();
-		solutionPath = new ArrayList<Cell>();
 
 		goalCell = cells[cells.length-1][cells[0].length-1];
 
@@ -67,13 +63,13 @@ public class Maze {
 		neighbours = findNeighbours(currentCell);
 
 		if(neighbours.size() == 0) {
-			if(!goalIsFound)
-				nextCell.setSolution(false);
 			nextCell = stack.pop();
+			if(!goalIsFound)
+				currentCell.setSolution(false);
 		}else {
 			nextCell = selectRandomNeighbour(neighbours);
 			if(!goalIsFound)
-				nextCell.setSolution(true);
+				currentCell.setSolution(true);
 
 			stack.push(currentCell);
 			removeWallBetween(currentCell, nextCell);
@@ -197,11 +193,11 @@ public class Maze {
 
 		//Fill start
 		g.setColor(Color.GREEN);
-		startCell.fillCellGoal(g);
+		startCell.fillCell(g);
 
 		//Fill goal
 		g.setColor(Color.blue);
-		goalCell.fillCellGoal(g);
+		goalCell.fillCell(g);
 
 
 	}

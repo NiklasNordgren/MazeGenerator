@@ -4,8 +4,9 @@ import java.awt.Graphics;
 public class Player {
 
 	private Game game;
-	private int size = 30;
+	private int size = 25;
 	private int xPos, yPos;
+	
 
 	public Player(Game game, int xPos, int yPos) {
 		this.game = game;
@@ -19,7 +20,7 @@ public class Player {
 
 	public void render(Graphics g) {
 		g.setColor(Color.ORANGE);
-		g.fillOval(xPos, yPos, size, size);
+		g.fillOval(xPos+2, yPos+2, size, size);
 	}
 
 	public void moveLeft() {

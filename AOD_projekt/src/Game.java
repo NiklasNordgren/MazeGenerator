@@ -1,6 +1,9 @@
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.util.Stack;
+
+import states.GameState;
+import states.MenuState;
+import states.State;
 
 public class Game implements Runnable {
 
@@ -16,7 +19,9 @@ public class Game implements Runnable {
 	private BufferStrategy bs;
 	private Graphics g;
 	
-
+	private State gameState;
+	private State menuState;
+	
 	public Game() {
 
 	}
@@ -29,6 +34,9 @@ public class Game implements Runnable {
 	
 		keyManager = new KeyManager(player);
 		display.getFrame().addKeyListener(keyManager);
+		
+		gameState = new GameState();
+		menuState = new MenuState();
 		
 
 	}
