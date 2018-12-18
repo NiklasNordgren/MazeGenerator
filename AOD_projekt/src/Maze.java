@@ -9,7 +9,7 @@ public class Maze {
 	private Game game;
 
 	public static Cell[][] cells;
-	
+
 	private Cell nextCell;
 
 	private Cell startCell;
@@ -41,7 +41,7 @@ public class Maze {
 		startCell = cells[0][0];
 
 		goalCell = cells[cells.length-1][cells[0].length-1];
-	
+
 		createMaze(startCell);
 	}
 
@@ -68,12 +68,12 @@ public class Maze {
 			nextCell = stack.pop();
 			if(!goalIsFound)
 				currentCell.setSolution(false);
-    }else{
+		}else{
 			nextCell = selectRandomNeighbour(neighbours);
-      stack.push(currentCell);
+			stack.push(currentCell);
 			if(!goalIsFound)
 				currentCell.setSolution(true);
-      
+
 			removeWallBetween(currentCell, nextCell);
 		}
 		createMaze(nextCell);
@@ -202,28 +202,6 @@ public class Maze {
 				}
 			}
 		 */
-
-	public void render(Graphics g) {
-
-		//Draw walls
-		for(int x = 0; x < cells.length; x++)
-			for(int y = 0; y < cells[x].length; y++)
-				cells[x][y].drawWalls(g);
-
-
-
-		//Neighbour test
-
-		/*
-		for(int i = 0; i < neighbours.size(); i++) {
-			g.setColor(Color.black);
-			neighbours.get(i).fillCell(g);
-		}
-		 */
-
-		//Fill goal
-		g.setColor(Color.blue);
-		goalCell.fillCellGoal(g);
 
 	}
 }
