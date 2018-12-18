@@ -40,8 +40,6 @@ public class Maze {
 
 		stack = new Stack<Cell>();
 		
-		
-
 		//startX = random.nextInt(cells.length);
 		//startY = random.nextInt(cells[0].length);
 
