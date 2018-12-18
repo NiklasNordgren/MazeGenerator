@@ -3,7 +3,7 @@ import java.awt.Graphics;
 public class Cell {
 
 	public static final int CELLSIZE = 30;
-	
+
 	public int[] walls = {1, 1, 1, 1}; //N, S, W, E    1 = wall, 0 = no wall
 
 	private int x, y;
@@ -22,29 +22,27 @@ public class Cell {
 
 		//North
 		if(walls[0] == 1)
-		g.drawLine(xPixels, yPixels, xPixels+CELLSIZE, yPixels);
+			g.drawLine(xPixels, yPixels, xPixels+CELLSIZE, yPixels);
 
 		//South
 		if(walls[1] == 1)
-		g.drawLine(xPixels, yPixels + CELLSIZE, xPixels + CELLSIZE, yPixels + CELLSIZE);
+			g.drawLine(xPixels, yPixels + CELLSIZE, xPixels + CELLSIZE, yPixels + CELLSIZE);
 
 		//West
 		if(walls[2] == 1)
-		g.drawLine(xPixels, yPixels, xPixels, yPixels + CELLSIZE);
+			g.drawLine(xPixels, yPixels, xPixels, yPixels + CELLSIZE);
 
 		//East
 		if(walls[3] == 1)
-<<<<<<< HEAD
-		g.drawLine(xPixels + CELLSIZE , yPixels, xPixels + CELLSIZE , yPixels + CELLSIZE);
-=======
-		g.drawLine(xPixels + CELLSIZE , yPixels , xPixels + CELLSIZE , yPixels + CELLSIZE);
->>>>>>> 3434caecfbf9d72f0851d185229ee2cf78490e5e
+			g.drawLine(xPixels + CELLSIZE , yPixels, xPixels + CELLSIZE , yPixels + CELLSIZE);
+
+
 	}
-	
+
 	public void fillCell(Graphics g) {
 		g.fillOval(xPixels, yPixels, CELLSIZE, CELLSIZE);
 	}
-	
+
 	public void fillCellGoal(Graphics g) {
 		g.fillOval(xPixels+2, yPixels+2, CELLSIZE-5, CELLSIZE-5);
 	}
@@ -56,7 +54,7 @@ public class Cell {
 	public void setVisited(boolean isVisited) {
 		this.isVisited = isVisited;
 	}
-	
+
 	public boolean isSolution() {
 		return isSolution;
 	}
