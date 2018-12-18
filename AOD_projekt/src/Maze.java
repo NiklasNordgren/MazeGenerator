@@ -8,13 +8,13 @@ public class Maze {
 
 	private Game game;
 
-	private Cell[][] cells;
+	public static Cell[][] cells;
 
 	private Cell currentCell;
 	private Cell nextCell;
-	
-	private Cell startCell;
+
 	private Cell goalCell;
+
 
 	private Stack<Cell> stack;
 
@@ -24,9 +24,9 @@ public class Maze {
 
 	private int mazeWidth = 20;
 	private int mazeHeight = 20;
-	
-	private int startX, startY;
-	
+
+	//private int startX, startY;
+
 	public Maze(Game game) {
 		this.game = game;
 
@@ -36,14 +36,12 @@ public class Maze {
 
 		stack = new Stack<Cell>();
 
-		startX = random.nextInt(cells.length);
-		startY = random.nextInt(cells[0].length);
-		
-		startCell = cells[0][0];
-		
+		//startX = random.nextInt(cells.length);
+		//startY = random.nextInt(cells[0].length);
+
 		goalCell = cells[cells.length-1][cells[0].length-1];
 
-		createMaze(cells[0][0]);
+		createMaze(goalCell);
 
 	}
 
@@ -70,12 +68,17 @@ public class Maze {
 		}else { 
 			nextCell = selectRandomNeighbour(neighbours);
 			stack.push(currentCell);
-
 			removeWallBetween(currentCell, nextCell);
 		}
 
 		createMaze(nextCell);
 
+	}
+	
+	private void mazeSolver(Cell current) {
+		
+		
+		
 	}
 
 	private boolean isAllVisited() {
@@ -110,7 +113,7 @@ public class Maze {
 			cc.walls[2] = 0;
 			nc.walls[3] = 0;
 		}
-		
+
 		if(ccX - ncX == -1) {
 			cc.walls[3] = 0;
 			nc.walls[2] = 0;
@@ -170,6 +173,17 @@ public class Maze {
 			for(int y = 0; y < cells[x].length; y++)
 				cells[x][y].drawWalls(g);
 
+		
+		for(int x = 0; x < cells.length; x++)
+			for(int y = 0; y < cells[x].length; y++) {
+				if(cells[x][y].isSolution()) {
+					g.setColor(Color.BLACK);
+					cells[x][y].fillCell(g);
+				}
+			}
+		 
+
+
 
 		/*
 
@@ -184,20 +198,18 @@ public class Maze {
 
 		//Neighbour test
 
+		/*
 		for(int i = 0; i < neighbours.size(); i++) {
 			g.setColor(Color.black);
 			neighbours.get(i).fillCell(g);
 		}
+		 */
 
 		//Fill current
 		g.setColor(Color.blue);
-		goalCell.fillCell(g);
+		goalCell.fillCellGoal(g);
 
-		
-		//Fill startCell
-		g.setColor(Color.GREEN);
-		startCell.fillCell(g);
-		 
+
 	}
 
 }

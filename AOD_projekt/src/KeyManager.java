@@ -5,6 +5,10 @@ public class KeyManager implements KeyListener {
 	
 	private Player player;
 	
+	public KeyManager(Player player) {
+		this.player = player;
+	}
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A)

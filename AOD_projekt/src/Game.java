@@ -23,10 +23,12 @@ public class Game implements Runnable {
 
 	private void init() {
 		display = new Display();
-		player = new Player(0, 0);
+		player = new Player(this, 0, 0);
 
 		maze = new Maze(this);
 	
+		keyManager = new KeyManager(player);
+		display.getFrame().addKeyListener(keyManager);
 		
 
 	}
@@ -47,7 +49,7 @@ public class Game implements Runnable {
 		//Draw
 
 		maze.render(g);
-		//player.render(g);
+		player.render(g);
 
 		//End Drawing
 		bs.show();
@@ -68,6 +70,8 @@ public class Game implements Runnable {
 		long lastTime = System.nanoTime();
 		long timer = 0;
 		int updates = 0;
+		
+		int seconds = 1;
 
 		while(running) {
 
@@ -85,7 +89,12 @@ public class Game implements Runnable {
 			}
 
 			if(timer >= 1000000000) {
-				display.getFrame().setTitle("fps/updates: " + updates);
+				//display.getFrame().setTitle("fps/updates: " + updates);
+				
+				display.getFrame().setTitle("Seconds: " + seconds);
+				
+				seconds++;
+				
 				updates = 0;
 				timer = 0;
 			}

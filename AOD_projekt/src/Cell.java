@@ -9,6 +9,7 @@ public class Cell {
 	private int x, y;
 	private int xPixels, yPixels;
 	private boolean isVisited;
+	private boolean isSolution;
 
 	public Cell(int x, int y) {
 		this.x = x;
@@ -39,6 +40,10 @@ public class Cell {
 	public void fillCell(Graphics g) {
 		g.fillRect(xPixels, yPixels, CELLSIZE, CELLSIZE);
 	}
+	
+	public void fillCellGoal(Graphics g) {
+		g.fillOval(xPixels+2, yPixels+2, CELLSIZE-5, CELLSIZE-5);
+	}
 
 	public boolean getIsVisited() {
 		return isVisited;
@@ -46,6 +51,14 @@ public class Cell {
 
 	public void setVisited(boolean isVisited) {
 		this.isVisited = isVisited;
+	}
+	
+	public boolean isSolution() {
+		return isSolution;
+	}
+
+	public void setSolution(boolean isSolution) {
+		this.isSolution = isSolution;
 	}
 
 	public int getX() {
@@ -55,6 +68,5 @@ public class Cell {
 	public int getY() {
 		return y;
 	}
-
 
 }
