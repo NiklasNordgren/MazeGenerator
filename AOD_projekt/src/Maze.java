@@ -12,6 +12,9 @@ public class Maze {
 
 	private Cell currentCell;
 	private Cell nextCell;
+	
+	private Cell startCell;
+	private Cell goalCell;
 
 	private Stack<Cell> stack;
 
@@ -35,8 +38,12 @@ public class Maze {
 
 		startX = random.nextInt(cells.length);
 		startY = random.nextInt(cells[0].length);
+		
+		startCell = cells[0][0];
+		
+		goalCell = cells[cells.length-1][cells[0].length-1];
 
-		createMaze(cells[startX][startY]);
+		createMaze(cells[0][0]);
 
 	}
 
@@ -156,8 +163,6 @@ public class Maze {
 
 	}
 
-
-
 	public void render(Graphics g) {
 
 		//Draw walls
@@ -184,22 +189,15 @@ public class Maze {
 			neighbours.get(i).fillCell(g);
 		}
 
-
-
 		//Fill current
 		g.setColor(Color.blue);
-		currentCell.fillCell(g);
+		goalCell.fillCell(g);
 
-		/*
-		//Fill next
+		
+		//Fill startCell
 		g.setColor(Color.GREEN);
-		nextCell.fillCell(g);
-		 */
-
-
-
-
-
+		startCell.fillCell(g);
+		 
 	}
 
 }
