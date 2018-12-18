@@ -9,14 +9,17 @@ public class Maze {
 	private Game game;
 
 	public static Cell[][] cells;
-
-	private Cell currentCell;
+	
 	private Cell nextCell;
 
+	private Cell startCell;
 	private Cell goalCell;
 
-
 	private Stack<Cell> stack;
+	private Stack<Cell> path;
+	private ArrayList<Cell> solutionPath;
+
+	private boolean goalIsFound;
 
 	private ArrayList<Cell> neighbours;
 
@@ -25,8 +28,6 @@ public class Maze {
 	private int mazeWidth = 20;
 	private int mazeHeight = 20;
 
-	//private int startX, startY;
-
 	public Maze(Game game) {
 		this.game = game;
 
@@ -34,15 +35,14 @@ public class Maze {
 
 		initializeCells();
 
+		goalIsFound = false;
 		stack = new Stack<Cell>();
 
-		//startX = random.nextInt(cells.length);
-		//startY = random.nextInt(cells[0].length);
+		startCell = cells[0][0];
 
 		goalCell = cells[cells.length-1][cells[0].length-1];
-
-		createMaze(goalCell);
-
+	
+		createMaze(startCell);
 	}
 
 	private void initializeCells() {
@@ -55,30 +55,29 @@ public class Maze {
 
 	private void createMaze(Cell currentCell) {
 
+		//Abort if every cell is visited.
 		if(isAllVisited())
 			return;
+		if(currentCell.equals(goalCell) && !goalIsFound)
+			goalIsFound = true;
 
-		this.currentCell = currentCell;
 		currentCell.setVisited(true);
 		neighbours = findNeighbours(currentCell);
 
-
 		if(neighbours.size() == 0) {
 			nextCell = stack.pop();
-		}else { 
+			if(!goalIsFound)
+				currentCell.setSolution(false);
+    }else{
 			nextCell = selectRandomNeighbour(neighbours);
-			stack.push(currentCell);
+      stack.push(currentCell);
+			if(!goalIsFound)
+				currentCell.setSolution(true);
+      
 			removeWallBetween(currentCell, nextCell);
 		}
-
 		createMaze(nextCell);
 
-	}
-	
-	private void mazeSolver(Cell current) {
-		
-		
-		
 	}
 
 	private boolean isAllVisited() {
@@ -91,7 +90,6 @@ public class Maze {
 
 
 	private void removeWallBetween(Cell cc, Cell nc) {
-
 
 		int ccX = cc.getX();
 		int ccY = cc.getY();
@@ -166,27 +164,36 @@ public class Maze {
 
 	}
 
+
+	public void drawSolutionPath(Graphics g) {
+		for(int x = 0; x < cells.length; x++)
+			for(int y = 0; y < cells[x].length; y++) {
+				if(cells[x][y].isSolution()) {
+
+					cells[x][y].fillCellGoal(g);
+				}
+			}
+
+
+	}
 	public void render(Graphics g) {
 
+		//Fill goalcell
+		g.setColor(Color.blue);
+		goalCell.fillCellGoal(g);
+
 		//Draw walls
+		g.setColor(Color.black);
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++)
 				cells[x][y].drawWalls(g);
 
-		
-		for(int x = 0; x < cells.length; x++)
-			for(int y = 0; y < cells[x].length; y++) {
-				if(cells[x][y].isSolution()) {
-					g.setColor(Color.BLACK);
-					cells[x][y].fillCell(g);
-				}
-			}
-		 
 
+		//Draw solution path
+		g.setColor(Color.green);
+		drawSolutionPath(g);
 
-
-		/*
-
+		/*	//Fill all visisted cells
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++) {
 				if(cells[x][y].getIsVisited()) {
@@ -195,6 +202,15 @@ public class Maze {
 				}
 			}
 		 */
+
+	public void render(Graphics g) {
+
+		//Draw walls
+		for(int x = 0; x < cells.length; x++)
+			for(int y = 0; y < cells[x].length; y++)
+				cells[x][y].drawWalls(g);
+
+
 
 		//Neighbour test
 
@@ -205,11 +221,9 @@ public class Maze {
 		}
 		 */
 
-		//Fill current
+		//Fill goal
 		g.setColor(Color.blue);
 		goalCell.fillCellGoal(g);
 
-
 	}
-
 }

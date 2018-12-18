@@ -47,7 +47,7 @@ public class Game implements Runnable {
 		//Clear screen
 		g.clearRect(0, 0, display.getWidth(), display.getHeight());
 		//Draw
-
+		
 		maze.render(g);
 		player.render(g);
 

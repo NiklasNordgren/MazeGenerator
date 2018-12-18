@@ -1,4 +1,5 @@
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -7,7 +8,7 @@ public class Display {
 	
 	private JFrame frame;
 	private Canvas canvas;
-	private int width = 600, height = 600;
+	private int width = 800, height = 600;
 	
 	public Display() {
 		
@@ -26,6 +27,9 @@ public class Display {
 		canvas.setMinimumSize(dimension);
 		canvas.setMaximumSize(dimension);
 		canvas.setFocusable(false);
+
+		canvas.setBackground(Color.WHITE);
+		
 		
 		frame.add(canvas);
 		frame.pack();
