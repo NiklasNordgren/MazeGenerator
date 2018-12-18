@@ -67,40 +67,6 @@ public class Maze {
 
 		createMaze(nextCell);
 
-		/*
-
-		if(counter > 9)
-			return;
-
-		this.currentCell = currentCell;
-
-		Cell nextCell;
-
-		currentCell.setVisited(true);
-
-		counter++;
-
-		neighbours = findNeighbours(currentCell);
-
-		stack.push(currentCell);
-
-		if(neighbours.size() == 0) {
-			nextCell = stack.pop();
-			createMaze(nextCell);
-
-		}else { 
-			nextCell = selectRandomNeighbour(neighbours);
-
-			removeWallBetween(currentCell, nextCell);
-
-
-			createMaze(nextCell);
-
-		}
-
-
-		 */
-
 	}
 
 	private boolean isAllVisited() {
