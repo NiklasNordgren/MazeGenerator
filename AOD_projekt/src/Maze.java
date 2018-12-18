@@ -18,8 +18,9 @@ public class Maze {
 	private ArrayList<Cell> neighbours;
 
 	private Random random;
-	private int counter;
 
+	private int mazeWidth = 10;
+	private int mazeHeight = 10;
 
 	public Maze(Game game) {
 		this.game = game;
@@ -28,19 +29,17 @@ public class Maze {
 
 		initializeCells();
 
-		counter = 0;
-
 		stack = new Stack<Cell>();
 
-		int randomX = random.nextInt(cells.length);
-		int randomY = random.nextInt(cells[0].length);
+		int startX = random.nextInt(cells.length);
+		int startY = random.nextInt(cells[0].length);
 
-		createMaze(cells[randomX][randomY]);
+		createMaze(cells[startX][startY]);
 
 	}
 
 	private void initializeCells() {
-		cells = new Cell[3][3];
+		cells = new Cell[mazeWidth][mazeHeight];
 
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++)
@@ -49,11 +48,36 @@ public class Maze {
 
 	private void createMaze(Cell currentCell) {
 
+		if(isAllVisited())
+			return;
+
+		this.currentCell = currentCell;
+		currentCell.setVisited(true);
+		neighbours = findNeighbours(currentCell);
+
+
+		if(neighbours.size() == 0) {
+			nextCell = stack.pop();
+		}else { 
+			nextCell = selectRandomNeighbour(neighbours);
+			stack.push(currentCell);
+
+			removeWallBetween(currentCell, nextCell);
+		}
+
+		createMaze(nextCell);
+
+		/*
+
+		if(counter > 9)
+			return;
+
 		this.currentCell = currentCell;
 
 		Cell nextCell;
 
 		currentCell.setVisited(true);
+
 		counter++;
 
 		neighbours = findNeighbours(currentCell);
@@ -62,22 +86,32 @@ public class Maze {
 
 		if(neighbours.size() == 0) {
 			nextCell = stack.pop();
-			
+			createMaze(nextCell);
 
 		}else { 
 			nextCell = selectRandomNeighbour(neighbours);
 
 			removeWallBetween(currentCell, nextCell);
 
-			
+
+			createMaze(nextCell);
 
 		}
 
-		if(counter < 10)
-			createMaze(nextCell);
 
+		 */
 
 	}
+
+	private boolean isAllVisited() {
+		for(int x = 0; x < cells.length; x++)
+			for(int y = 0; y < cells[x].length; y++)
+				if(cells[x][y].getIsVisited() == false)
+					return false;
+		return true;
+	}
+
+
 	private void removeWallBetween(Cell cc, Cell nc) {
 
 
@@ -165,31 +199,39 @@ public class Maze {
 			for(int y = 0; y < cells[x].length; y++)
 				cells[x][y].drawWalls(g);
 
-		
+
+		/*
+
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++) {
 				if(cells[x][y].getIsVisited()) {
 					g.setColor(Color.RED);
 					cells[x][y].fillCell(g);
 				}
-
-
 			}
+		 */
+
+		//Neighbour test
+
+		for(int i = 0; i < neighbours.size(); i++) {
+			g.setColor(Color.black);
+			neighbours.get(i).fillCell(g);
+		}
+
+
 
 		//Fill current
 		g.setColor(Color.blue);
-		//	currentCell.fillCell(g);
+		currentCell.fillCell(g);
 
-		//Fill next
-		//g.setColor(Color.GREEN);
-		//nextCell.fillCell(g);
-
-		//Neighbour test
 		/*
-		for(int i = 0; i < neighbours.size(); i++) {
-			neighbours.get(i).fillCell(g);
-		}
-		 */
+		//Fill next
+		g.setColor(Color.GREEN);
+		nextCell.fillCell(g);
+		*/
+
+
+
 
 
 	}

@@ -23,7 +23,7 @@ public class Game implements Runnable {
 
 	private void init() {
 		display = new Display();
-		player = new Player(30, 0);
+		player = new Player(0, 0);
 
 		maze = new Maze(this);
 	
