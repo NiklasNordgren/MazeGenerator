@@ -13,12 +13,19 @@ public class Maze {
 	private Cell currentCell;
 	private Cell nextCell;
 
+	private Cell startCell;
 	private Cell goalCell;
 
+	private ArrayQueue<Cell> solvingQueue;
 
 	private Stack<Cell> stack;
+	private Stack<Cell> path;
+	private Stack<Cell> solution;
+
+	private boolean goalIsFound;
 
 	private ArrayList<Cell> neighbours;
+	private ArrayList<Cell> solutionPath;
 
 	private Random random;
 
@@ -34,14 +41,21 @@ public class Maze {
 
 		initializeCells();
 
+		goalIsFound = false;
 		stack = new Stack<Cell>();
+		path = new Stack<Cell>();
+		solution = new Stack<Cell>();
+		solutionPath = new ArrayList<Cell>();
 
 		//startX = random.nextInt(cells.length);
 		//startY = random.nextInt(cells[0].length);
 
 		goalCell = cells[cells.length-1][cells[0].length-1];
+		startCell = cells[0][0];
 
-		createMaze(goalCell);
+		createMaze(startCell);
+
+		//mazeSolver(cells[0][0]);
 
 	}
 
@@ -55,6 +69,7 @@ public class Maze {
 
 	private void createMaze(Cell currentCell) {
 
+		//Abort if every cell is visited.
 		if(isAllVisited())
 			return;
 
@@ -62,23 +77,52 @@ public class Maze {
 		currentCell.setVisited(true);
 		neighbours = findNeighbours(currentCell);
 
+		//om vi har hittat målet - abort
+		if(currentCell == goalCell) {
+
+			goalIsFound = true;
+
+			Graphics g = null;
+			g.setColor(Color.GRAY);
+			drawSolutionPath(g);
+
+
+		}
+
+
+
+		System.out.println("Stack : ::: : " + stack.size());
+		System.out.println("path: " + path.size());
+		System.out.println(solutionPath.size());
+
 
 		if(neighbours.size() == 0) {
 			nextCell = stack.pop();
+			currentCell.setSolution(false);
+
+
 		}else { 
 			nextCell = selectRandomNeighbour(neighbours);
 			stack.push(currentCell);
+			currentCell.setSolution(true);
+
 			removeWallBetween(currentCell, nextCell);
 		}
 
 		createMaze(nextCell);
 
 	}
-	
-	private void mazeSolver(Cell current) {
-		
-		
-		
+
+
+
+	private void mazeSolver(Cell start) {
+
+		solvingQueue = new ArrayQueue<>(100);
+
+		solvingQueue.enqueue(start);
+
+
+
 	}
 
 	private boolean isAllVisited() {
@@ -165,15 +209,35 @@ public class Maze {
 	public void update() {
 
 	}
+	public void drawSolutionPath(Graphics g) {
+		for(int x = 0; x < cells.length; x++)
+			for(int y = 0; y < cells[x].length; y++) {
+				if(cells[x][y].isSolution()) {
+					g.setColor(Color.magenta);
+					cells[x][y].fillCellGoal(g);
+				}
+			}
+		
 
+	}
 	public void render(Graphics g) {
+
+
 
 		//Draw walls
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++)
 				cells[x][y].drawWalls(g);
 
+
+
+
+
 		
+
+
+		//Draw solution path
+		/*
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++) {
 				if(cells[x][y].isSolution()) {
@@ -181,12 +245,18 @@ public class Maze {
 					cells[x][y].fillCell(g);
 				}
 			}
-		 
-
 
 
 		/*
 
+		for(int x = 0; x < solutionPath.size(); x++) {
+			g.setColor(Color.magenta);
+			solutionPath.get(x).fillCellGoal(g);
+		}*/
+
+		/*
+
+		//Fill all visisted cells
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++) {
 				if(cells[x][y].getIsVisited()) {
@@ -205,7 +275,7 @@ public class Maze {
 		}
 		 */
 
-		//Fill current
+		//Fill goalcell
 		g.setColor(Color.blue);
 		goalCell.fillCellGoal(g);
 

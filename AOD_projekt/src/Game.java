@@ -48,6 +48,8 @@ public class Game implements Runnable {
 		g.clearRect(0, 0, display.getWidth(), display.getHeight());
 		//Draw
 
+		maze.drawSolutionPath(g);
+		
 		maze.render(g);
 		player.render(g);
 
