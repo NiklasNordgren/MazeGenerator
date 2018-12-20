@@ -12,8 +12,8 @@ public class Maze {
 
 	private Cell nextCell;
 
-	private Cell startCell;
 	private Cell goalCell;
+	private Cell startCell;
 
 	private Stack<Cell> stack;
 	private Stack<Cell> path;
@@ -38,9 +38,9 @@ public class Maze {
 		goalIsFound = false;
 		stack = new Stack<Cell>();
 
-		startCell = cells[0][0];
+		goalCell = cells[0][0];
 
-		goalCell = cells[cells.length-1][cells[0].length-1];
+		startCell = cells[cells.length-1][cells[0].length-1];
 
 		createMaze(startCell);
 	}
@@ -166,6 +166,7 @@ public class Maze {
 
 
 	public void drawSolutionPath(Graphics g) {
+		
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++) {
 				if(cells[x][y].isSolution()) {
@@ -173,14 +174,10 @@ public class Maze {
 					cells[x][y].fillCellGoal(g);
 				}
 			}
-
-
 	}
 	public void render(Graphics g) {
 
-		//Fill goalcell
-		g.setColor(Color.blue);
-		goalCell.fillCellGoal(g);
+		
 
 		//Draw walls
 		g.setColor(Color.black);
@@ -191,7 +188,11 @@ public class Maze {
 
 		//Draw solution path
 		g.setColor(Color.green);
-		drawSolutionPath(g);
+		drawSolutionPath(g); 
+		
+		//Fill goalcell
+		g.setColor(Color.blue);
+		startCell.fillCellGoal(g);
 
 		/*	//Fill all visisted cells
 		for(int x = 0; x < cells.length; x++)
