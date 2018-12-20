@@ -16,8 +16,6 @@ public class Maze {
 	private Cell startCell;
 
 	private Stack<Cell> stack;
-	private Stack<Cell> path;
-	private ArrayList<Cell> solutionPath;
 
 	private boolean goalIsFound;
 
@@ -25,16 +23,19 @@ public class Maze {
 
 	private Random random;
 
-	private int mazeWidth = 20;
-	private int mazeHeight = 20;
+	private int mazeWidth = 10;
+	private int mazeHeight = 10;
+	
+	private int level = 5;
 
 	public Maze(Game game) {
 		this.game = game;
 
 		random = new Random();
+		random.setSeed(level);
 
 		initializeCells();
-
+		
 		goalIsFound = false;
 		stack = new Stack<Cell>();
 
@@ -43,6 +44,7 @@ public class Maze {
 		startCell = cells[cells.length-1][cells[0].length-1];
 
 		createMaze(startCell);
+		
 	}
 
 	private void initializeCells() {
@@ -152,13 +154,12 @@ public class Maze {
 	}
 
 	private Cell selectRandomNeighbour(ArrayList<Cell> neighbours) {
-
+	
 		Cell randomCell = neighbours.get(random.nextInt(neighbours.size()));
 
 		return randomCell;
 
 	}
-
 
 	public void update() {
 
@@ -177,14 +178,11 @@ public class Maze {
 	}
 	public void render(Graphics g) {
 
-		
-
 		//Draw walls
 		g.setColor(Color.black);
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++)
 				cells[x][y].drawWalls(g);
-
 
 		//Draw solution path
 		g.setColor(Color.green);

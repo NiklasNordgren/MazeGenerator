@@ -1,3 +1,4 @@
+import java.util.Random;
 
 public class Launcher {
 	
@@ -6,6 +7,13 @@ public class Launcher {
 		Game game = new Game();
 		game.start();
 		
+		
+	}
+	public int randomGen(long seed) {
+		Random gen = new Random(seed);
+		int num = gen.nextInt();
+		
+		return num;
 	}
 
 }
