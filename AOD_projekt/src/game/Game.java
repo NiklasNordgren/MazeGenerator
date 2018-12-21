@@ -1,6 +1,8 @@
+package game;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import input.KeyManager;
 import states.GameState;
 import states.MenuState;
 import states.State;
@@ -11,37 +13,36 @@ public class Game implements Runnable {
 	private boolean running;
 
 	private Display display;
-	private Player player;
+
 	private KeyManager keyManager;
-	
-	private Maze maze;
 
 	private BufferStrategy bs;
 	private Graphics g;
-	
-	private State gameState;
+
+	private GameState gameState;
 	private State menuState;
 	
+	private int seconds;
+
 	public Game() {
 
 	}
 
 	private void init() {
 		display = new Display();
-		player = new Player(this, 0, 0);
 
-		maze = new Maze(this);
-	
-		keyManager = new KeyManager(player);
+		gameState = new GameState(this);
+		keyManager = new KeyManager(gameState.getPlayer());
+		menuState = new MenuState(this);
+		State.setState(gameState);
+
 		display.getFrame().addKeyListener(keyManager);
-		
-		gameState = new GameState();
-		menuState = new MenuState();
-		
-
 	}
 
 	private void update() {
+
+		if(State.getState() != null)
+			State.getState().update();
 
 	}
 
@@ -56,16 +57,13 @@ public class Game implements Runnable {
 		g.clearRect(0, 0, display.getWidth(), display.getHeight());
 		//Draw
 
-		
-		maze.render(g);
-		player.render(g);
+		if(State.getState() != null)
+			State.getState().render(g);
 
 		//End Drawing
 		bs.show();
 		g.dispose();
 	}
-
-
 
 	@Override
 	public void run() {
@@ -79,8 +77,8 @@ public class Game implements Runnable {
 		long lastTime = System.nanoTime();
 		long timer = 0;
 		int updates = 0;
-		
-		int seconds = 1;
+
+		seconds = 1;
 
 		while(running) {
 
@@ -93,17 +91,17 @@ public class Game implements Runnable {
 				update();
 				render();
 
-				updates ++;
+				updates++;
 				delta--;
 			}
 
 			if(timer >= 1000000000) {
 				//display.getFrame().setTitle("fps/updates: " + updates);
-				
+
 				display.getFrame().setTitle("Seconds: " + seconds);
-				
+
 				seconds++;
-				
+
 				updates = 0;
 				timer = 0;
 			}
@@ -133,12 +131,16 @@ public class Game implements Runnable {
 		}
 	}
 	
-	public int getWidth() {
-		return display.getWidth();
+	public void resetGame() {
+		gameState.resetGame();
+		keyManager = new KeyManager(gameState.getPlayer());
+		display.getFrame().addKeyListener(keyManager);
+		seconds = 0;
+		
 	}
 	
-	public int getHeight() {
-		return display.getHeight();
+	public int getSeconds() {
+		return seconds;
 	}
 
 }

@@ -1,12 +1,13 @@
+package environment;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
-public class Maze {
+import game.Game;
 
-	private Game game;
+public class Maze {
 
 	public static Cell[][] cells;
 
@@ -22,13 +23,12 @@ public class Maze {
 
 	private Random random;
 
-	private int mazeWidth = 20;
-	private int mazeHeight = 20;
+	private int mazeWidth = 3;
+	private int mazeHeight = 3;
 
 	private boolean goalIsFound;
 
-	public Maze(Game game) {
-		this.game = game;
+	public Maze() {
 
 		random = new Random();
 
@@ -36,9 +36,9 @@ public class Maze {
 
 		stack = new Stack<Cell>();
 
-		goalCell = cells[cells.length-1][cells[0].length-1];
+		startCell = cells[cells.length-1][cells[0].length-1];
 
-		startCell = cells[0][0];
+		goalCell = cells[0][0];
 
 		createMaze(startCell);
 	}
@@ -47,8 +47,9 @@ public class Maze {
 		cells = new Cell[mazeWidth][mazeHeight];
 
 		for(int x = 0; x < cells.length; x++)
-			for(int y = 0; y < cells[x].length; y++)
+			for(int y = 0; y < cells[x].length; y++) 
 				cells[x][y] = new Cell(x, y);
+
 	}
 
 	private void createMaze(Cell currentCell) {
@@ -158,7 +159,6 @@ public class Maze {
 
 	}
 
-
 	public void update() {
 
 	}
@@ -170,35 +170,13 @@ public class Maze {
 			for(int y = 0; y < cells[x].length; y++)
 				cells[x][y].drawWalls(g);
 
-
-		for(int x = 0; x < cells.length; x++)
-			for(int y = 0; y < cells[x].length; y++) {
-				if(cells[x][y].isSolution()) {
-					g.setColor(Color.MAGENTA);
-					cells[x][y].fillCell(g);
-				}
-			}
-
-
-		//Neighbour test
-
-		/*
-		for(int i = 0; i < neighbours.size(); i++) {
-			g.setColor(Color.black);
-			neighbours.get(i).fillCell(g);
-		}
-		 */
-
-
-
-		//Fill start
+		//Fill goal
 		g.setColor(Color.GREEN);
 		startCell.fillCell(g);
 
-		//Fill goal
+		//Fill start
 		g.setColor(Color.blue);
 		goalCell.fillCell(g);
-
 
 	}
 
