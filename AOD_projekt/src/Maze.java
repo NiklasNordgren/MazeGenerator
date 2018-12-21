@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 public class Maze {
 
 	private Game game;
+	private Player player;
 
 	public static Cell[][] cells;
 
@@ -17,26 +21,28 @@ public class Maze {
 
 	private Stack<Cell> stack;
 
-	private boolean goalIsFound;
+	private boolean solutionPathIsFound, goalIsFound;
+
 
 	private ArrayList<Cell> neighbours;
 
 	private Random random;
 
-	private int mazeWidth = 10;
-	private int mazeHeight = 10;
-	
+	private int mazeWidth = 3;
+	private int mazeHeight = 3;
+
 	private int level = 5;
 
-	public Maze(Game game) {
+	public Maze(Game game, Player player) {
 		this.game = game;
+		this.player = player;
 
 		random = new Random();
 		random.setSeed(level);
 
 		initializeCells();
-		
-		goalIsFound = false;
+
+		solutionPathIsFound = false;
 		stack = new Stack<Cell>();
 
 		goalCell = cells[0][0];
@@ -44,7 +50,7 @@ public class Maze {
 		startCell = cells[cells.length-1][cells[0].length-1];
 
 		createMaze(startCell);
-		
+
 	}
 
 	private void initializeCells() {
@@ -57,23 +63,23 @@ public class Maze {
 
 	private void createMaze(Cell currentCell) {
 
-		//Abort if every cell is visited.
 		if(isAllVisited())
 			return;
-		if(currentCell.equals(goalCell) && !goalIsFound)
-			goalIsFound = true;
+
+		if(currentCell.equals(goalCell) && !solutionPathIsFound) 
+			solutionPathIsFound = true;
 
 		currentCell.setVisited(true);
 		neighbours = findNeighbours(currentCell);
 
 		if(neighbours.size() == 0) {
 			nextCell = stack.pop();
-			if(!goalIsFound)
+			if(!solutionPathIsFound)
 				currentCell.setSolution(false);
 		}else{
 			nextCell = selectRandomNeighbour(neighbours);
 			stack.push(currentCell);
-			if(!goalIsFound)
+			if(!solutionPathIsFound)
 				currentCell.setSolution(true);
 
 			removeWallBetween(currentCell, nextCell);
@@ -89,7 +95,6 @@ public class Maze {
 					return false;
 		return true;
 	}
-
 
 	private void removeWallBetween(Cell cc, Cell nc) {
 
@@ -154,7 +159,7 @@ public class Maze {
 	}
 
 	private Cell selectRandomNeighbour(ArrayList<Cell> neighbours) {
-	
+
 		Cell randomCell = neighbours.get(random.nextInt(neighbours.size()));
 
 		return randomCell;
@@ -163,18 +168,26 @@ public class Maze {
 
 	public void update() {
 
+		if(player.findCurrentCell() == startCell && !goalIsFound) {
+
+			goalIsFound = true; 
+
+			if(goalIsFound == true) {
+				JDialog dialog = new JDialog();
+				JOptionPane.showMessageDialog(dialog, 
+						"Congratulations! Your time is: "
+						+ game.getSeconds() + " seconds.");
+			}
+		}
 	}
 
-
 	public void drawSolutionPath(Graphics g) {
-		
-		for(int x = 0; x < cells.length; x++)
-			for(int y = 0; y < cells[x].length; y++) {
-				if(cells[x][y].isSolution()) {
 
+		for(int x = 0; x < cells.length; x++)
+			for(int y = 0; y < cells[x].length; y++) 
+				if(cells[x][y].isSolution()) 
 					cells[x][y].fillCellGoal(g);
-				}
-			}
+
 	}
 	public void render(Graphics g) {
 
@@ -187,10 +200,12 @@ public class Maze {
 		//Draw solution path
 		g.setColor(Color.green);
 		drawSolutionPath(g); 
-		
+
 		//Fill goalcell
 		g.setColor(Color.blue);
 		startCell.fillCellGoal(g);
+
+
 
 		/*	//Fill all visisted cells
 		for(int x = 0; x < cells.length; x++)
@@ -201,6 +216,5 @@ public class Maze {
 				}
 			}
 		 */
-
 	}
 }

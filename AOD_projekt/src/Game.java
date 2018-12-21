@@ -10,12 +10,13 @@ public class Game implements Runnable {
 	private Display display;
 	private Player player;
 	private KeyManager keyManager;
-	
+
 	private Maze maze;
 
 	private BufferStrategy bs;
 	private Graphics g;
-	
+	private int seconds;
+
 
 	public Game() {
 
@@ -25,15 +26,14 @@ public class Game implements Runnable {
 		display = new Display();
 		player = new Player(this, 0, 0);
 
-		maze = new Maze(this);
-	
+		maze = new Maze(this, player);
+
 		keyManager = new KeyManager(player);
 		display.getFrame().addKeyListener(keyManager);
-		
-
 	}
 
 	private void update() {
+		maze.update();
 
 	}
 
@@ -46,8 +46,8 @@ public class Game implements Runnable {
 		g = bs.getDrawGraphics();
 		//Clear screen
 		g.clearRect(0, 0, display.getWidth(), display.getHeight());
-		//Draw
 		
+		//Draw
 		maze.render(g);
 		player.render(g);
 
@@ -70,8 +70,8 @@ public class Game implements Runnable {
 		long lastTime = System.nanoTime();
 		long timer = 0;
 		int updates = 0;
-		
-		int seconds = 1;
+
+		seconds = 1;
 
 		while(running) {
 
@@ -90,21 +90,24 @@ public class Game implements Runnable {
 
 			if(timer >= 1000000000) {
 				//display.getFrame().setTitle("fps/updates: " + updates);
-				
+
 				display.getFrame().setTitle("Seconds: " + seconds);
-				
+
 				seconds++;
-				
+
 				updates = 0;
 				timer = 0;
 			}
-
 		}
 
 		stop();
 
 	}
 
+	public int getSeconds() {
+		return seconds;
+	}
+	
 	public synchronized void start() {
 		if(running)
 			return;
@@ -123,13 +126,12 @@ public class Game implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public int getWidth() {
 		return display.getWidth();
 	}
-	
+
 	public int getHeight() {
 		return display.getHeight();
 	}
-
 }

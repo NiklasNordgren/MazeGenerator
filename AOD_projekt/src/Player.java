@@ -58,7 +58,7 @@ public class Player {
 			
 	}
 	
-	private Cell findCurrentCell() {
+	public Cell findCurrentCell() {
 		
 		Cell currentCell = Maze.cells[xPos/30][yPos/30];
 		

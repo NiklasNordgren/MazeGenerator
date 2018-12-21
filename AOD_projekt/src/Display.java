@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class Display {
 	
@@ -31,10 +32,12 @@ public class Display {
 		canvas.setBackground(Color.WHITE);
 		
 		
+		
 		frame.add(canvas);
 		frame.pack();
 		
 	}
+	
 
 	public JFrame getFrame() {
 		return frame;
