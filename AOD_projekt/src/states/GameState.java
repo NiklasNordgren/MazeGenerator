@@ -17,10 +17,13 @@ public class GameState extends State {
 	
 	public GameState(Game game) {
 		super();
+		init(game);
+	}
+	
+	private void init(Game game) {
 		this.game = game;
 		maze = new Maze();
 		player = new Player(game);
-		
 	}
 	
 	@Override

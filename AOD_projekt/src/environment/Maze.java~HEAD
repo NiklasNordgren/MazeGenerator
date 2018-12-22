@@ -10,36 +10,48 @@ import game.Game;
 public class Maze {
 
 	public static Cell[][] cells;
-
-	private Cell currentCell;
+	
 	private Cell nextCell;
 
-	private Cell goalCell;
 	private Cell startCell;
+	private Cell goalCell;
 
 	private Stack<Cell> stack;
+
+	private boolean goalIsFound;
 
 	private ArrayList<Cell> neighbours;
 
 	private Random random;
 
-	private int mazeWidth = 5;
-	private int mazeHeight = 5;
+	private int mazeWidth = 3;
+	private int mazeHeight = 3;
 
+<<<<<<< HEAD:AOD_projekt/src/environment/Maze.java
 	private boolean goalIsFound;
 
 	public Maze() {
+=======
+	public Maze(Game game) {
+		this.game = game;
+>>>>>>> 13ea8d635e0476159367d13e7107144d9e0df434:AOD_projekt/src/Maze.java
 
 		random = new Random();
 
 		initializeCells();
 
+		goalIsFound = false;
 		stack = new Stack<Cell>();
+<<<<<<< HEAD:AOD_projekt/src/environment/Maze.java
 
 		startCell = cells[cells.length-1][cells[0].length-1];
+=======
+>>>>>>> 13ea8d635e0476159367d13e7107144d9e0df434:AOD_projekt/src/Maze.java
 
 		goalCell = cells[0][0];
 
+		goalCell = cells[cells.length-1][cells[0].length-1];
+	
 		createMaze(startCell);
 	}
 
@@ -54,12 +66,12 @@ public class Maze {
 
 	private void createMaze(Cell currentCell) {
 
+		//Abort if every cell is visited.
 		if(isAllVisited())
 			return;
 		if(currentCell.equals(goalCell) && !goalIsFound)
 			goalIsFound = true;
 
-		this.currentCell = currentCell;
 		currentCell.setVisited(true);
 		neighbours = findNeighbours(currentCell);
 
@@ -67,15 +79,23 @@ public class Maze {
 			nextCell = stack.pop();
 			if(!goalIsFound)
 				currentCell.setSolution(false);
+<<<<<<< HEAD:AOD_projekt/src/environment/Maze.java
 		}else {
+=======
+    }else{
+>>>>>>> 13ea8d635e0476159367d13e7107144d9e0df434:AOD_projekt/src/Maze.java
 			nextCell = selectRandomNeighbour(neighbours);
+      stack.push(currentCell);
 			if(!goalIsFound)
 				currentCell.setSolution(true);
+<<<<<<< HEAD:AOD_projekt/src/environment/Maze.java
 
 			stack.push(currentCell);
+=======
+      
+>>>>>>> 13ea8d635e0476159367d13e7107144d9e0df434:AOD_projekt/src/Maze.java
 			removeWallBetween(currentCell, nextCell);
 		}
-
 		createMaze(nextCell);
 
 	}
@@ -163,13 +183,31 @@ public class Maze {
 
 	}
 
+
+	public void drawSolutionPath(Graphics g) {
+		for(int x = 0; x < cells.length; x++)
+			for(int y = 0; y < cells[x].length; y++) {
+				if(cells[x][y].isSolution()) {
+
+					cells[x][y].fillCellGoal(g);
+				}
+			}
+
+
+	}
 	public void render(Graphics g) {
 
+		//Fill goalcell
+		g.setColor(Color.blue);
+		goalCell.fillCellGoal(g);
+
 		//Draw walls
+		g.setColor(Color.black);
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++)
 				cells[x][y].drawWalls(g);
 
+<<<<<<< HEAD:AOD_projekt/src/environment/Maze.java
 		//Fill goal
 		g.setColor(Color.GREEN);
 		startCell.fillCell(g);
@@ -177,7 +215,44 @@ public class Maze {
 		//Fill start
 		g.setColor(Color.blue);
 		goalCell.fillCell(g);
+=======
+
+		//Draw solution path
+		g.setColor(Color.green);
+		drawSolutionPath(g);
+
+		/*	//Fill all visisted cells
+		for(int x = 0; x < cells.length; x++)
+			for(int y = 0; y < cells[x].length; y++) {
+				if(cells[x][y].getIsVisited()) {
+					g.setColor(Color.RED);
+					cells[x][y].fillCell(g);
+				}
+			}
+		 */
+
+	public void render(Graphics g) {
+
+		//Draw walls
+		for(int x = 0; x < cells.length; x++)
+			for(int y = 0; y < cells[x].length; y++)
+				cells[x][y].drawWalls(g);
+
+
+
+		//Neighbour test
+
+		/*
+		for(int i = 0; i < neighbours.size(); i++) {
+			g.setColor(Color.black);
+			neighbours.get(i).fillCell(g);
+		}
+		 */
+
+		//Fill goal
+		g.setColor(Color.blue);
+		goalCell.fillCellGoal(g);
+>>>>>>> 13ea8d635e0476159367d13e7107144d9e0df434:AOD_projekt/src/Maze.java
 
 	}
-
 }

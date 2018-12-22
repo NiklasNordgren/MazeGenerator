@@ -11,6 +11,10 @@ public class MenuState extends State {
 	public MenuState(Game game) {
 		this.game = game;
 	}
+	
+	private void init() {
+		
+	}
 
 	@Override
 	public void update() {
@@ -19,7 +23,7 @@ public class MenuState extends State {
 
 	@Override
 	public void render(Graphics g) {
-		// TODO Auto-generated method stub
+		g.drawRect(100, 100, 100, 100);
 	}
 
 }

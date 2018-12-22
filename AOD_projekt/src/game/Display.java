@@ -9,8 +9,9 @@ public class Display {
 	
 	private JFrame frame;
 	private Canvas canvas;
+
 	public static int width = 1600, height = 900;
-	
+
 	public Display() {
 		
 		Dimension dimension = new Dimension(width, height);
@@ -28,7 +29,9 @@ public class Display {
 		canvas.setMinimumSize(dimension);
 		canvas.setMaximumSize(dimension);
 		canvas.setFocusable(false);
-		canvas.setBackground(Color.white);
+
+		canvas.setBackground(Color.WHITE);
+		
 		
 		frame.add(canvas);
 		frame.pack();

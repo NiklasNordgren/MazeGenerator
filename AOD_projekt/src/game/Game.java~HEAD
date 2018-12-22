@@ -20,7 +20,7 @@ public class Game implements Runnable {
 	private Graphics g;
 
 	private GameState gameState;
-	private MenuState menuState;
+	private State menuState;
 	
 	private int seconds;
 
@@ -35,7 +35,6 @@ public class Game implements Runnable {
 		keyManager = new KeyManager(gameState.getPlayer());
 		menuState = new MenuState(this);
 		State.setState(gameState);
-		//State.setState(menuState);
 
 		display.getFrame().addKeyListener(keyManager);
 	}
@@ -57,9 +56,15 @@ public class Game implements Runnable {
 		//Clear screen
 		g.clearRect(0, 0, display.getWidth(), display.getHeight());
 		//Draw
+<<<<<<< HEAD:AOD_projekt/src/game/Game.java
 
 		if(State.getState() != null)
 			State.getState().render(g);
+=======
+		
+		maze.render(g);
+		player.render(g);
+>>>>>>> 13ea8d635e0476159367d13e7107144d9e0df434:AOD_projekt/src/Game.java
 
 		//End Drawing
 		bs.show();
