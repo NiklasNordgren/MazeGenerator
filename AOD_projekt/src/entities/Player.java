@@ -7,7 +7,6 @@ import javax.swing.JOptionPane;
 
 import environment.Cell;
 import environment.Maze;
-import game.Display;
 import game.Game;
 
 public class Player {
@@ -42,7 +41,6 @@ public class Player {
 			for(int x = 0; x < Maze.cells.length; x++)
 				for(int y = 0; y < Maze.cells[x].length; y++) {
 					if(Maze.cells[x][y].isSolution()) {
-
 						Maze.cells[x][y].fillCell(g);
 					}
 				}
@@ -101,7 +99,6 @@ public class Player {
 	
 	public void checkIfGoalIsReached() {
 		if(currentCell == Maze.cells[Maze.cells.length-1][Maze.cells[0].length-1] && !goalIsFound) {
-			System.out.println(currentCell.getX() + " " + currentCell.getY());
 			goalIsFound = true;
 			JDialog dialog = new JDialog();
 			JOptionPane.showMessageDialog(dialog, "Winner winner chicken dinner!\nMaze completed in: " + game.getSeconds() + " s");
