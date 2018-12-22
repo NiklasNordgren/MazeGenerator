@@ -28,10 +28,10 @@ public class Maze {
 
 	private Random random;
 
-	private int mazeWidth = 3;
-	private int mazeHeight = 3;
+	private int mazeWidth = 10;
+	private int mazeHeight = 10;
 
-	private int level = 5;
+	private int level = 3;
 
 	public Maze(Game game, Player player) {
 		this.game = game;
@@ -197,9 +197,9 @@ public class Maze {
 			for(int y = 0; y < cells[x].length; y++)
 				cells[x][y].drawWalls(g);
 
-		//Draw solution path
+	/*	//Draw solution path
 		g.setColor(Color.green);
-		drawSolutionPath(g); 
+		drawSolutionPath(g); */
 
 		//Fill goalcell
 		g.setColor(Color.blue);
