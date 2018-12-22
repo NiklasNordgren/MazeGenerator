@@ -51,7 +51,6 @@ public class Player {
 		g.setColor(Color.darkGray);
 		g.fillOval(x+2, y+2, playerSize, playerSize);
 
-
 	}
 
 	public void moveLeft() {
