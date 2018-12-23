@@ -13,6 +13,8 @@ public class Cell {
 	private int xPixels, yPixels;
 	private boolean isVisited;
 	private boolean isSolution;
+	
+	private int wallSize = 3;
 
 	public Cell(int x, int y) {
 		this.x = x;
@@ -25,22 +27,26 @@ public class Cell {
 		
 		//North
 		if(walls[0] == 1) {
-			g.drawLine(xPixels, yPixels, xPixels+CELLSIZE, yPixels);
+			//g.drawLine(xPixels, yPixels, xPixels+CELLSIZE, yPixels);
+			g.fillRect(xPixels, yPixels, CELLSIZE, wallSize);
 		}
 			
 		//South
 		if(walls[1] == 1) {
-			g.drawLine(xPixels, yPixels + CELLSIZE, xPixels + CELLSIZE, yPixels + CELLSIZE);
+			//g.drawLine(xPixels, yPixels + CELLSIZE, xPixels + CELLSIZE, yPixels + CELLSIZE);
+			g.fillRect(xPixels, yPixels + CELLSIZE, CELLSIZE, wallSize);
 		}
 			
 		//West
 		if(walls[2] == 1) {
-			g.drawLine(xPixels, yPixels, xPixels, yPixels + CELLSIZE);
+			//g.drawLine(xPixels, yPixels, xPixels, yPixels + CELLSIZE);
+			g.fillRect(xPixels, yPixels, wallSize, CELLSIZE);
 		}
 			
 		//East
 		if(walls[3] == 1) {
-			g.drawLine(xPixels + CELLSIZE , yPixels, xPixels + CELLSIZE , yPixels + CELLSIZE);
+			//g.drawLine(xPixels + CELLSIZE , yPixels, xPixels + CELLSIZE , yPixels + CELLSIZE);
+			g.fillRect(xPixels + CELLSIZE, yPixels, wallSize, CELLSIZE+wallSize);
 		}
 		
 			 
