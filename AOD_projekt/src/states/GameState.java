@@ -41,9 +41,4 @@ public class GameState extends State {
 		return player;
 	}
 	
-	public void resetGame() {
-		maze = new Maze();
-		player = new Player(game);
-	}
-	
 }

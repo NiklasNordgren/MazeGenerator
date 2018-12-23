@@ -1,29 +1,48 @@
 package states;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import game.Game;
+import gfx.Assets;
+import ui.ClickListener;
+import ui.UIImageButton;
+import ui.UIObject;
 
 public class MenuState extends State {
-	
+
 	private Game game;
-	
+	private ArrayList<UIObject> uiObjects;
+
 	public MenuState(Game game) {
 		this.game = game;
+		init();
 	}
-	
+
 	private void init() {
-		
+		uiObjects = new ArrayList<>();
+
+		uiObjects.add(new UIImageButton(64, 64, 64, 64, Assets.btn_start, new ClickListener() {
+
+			@Override
+			public void onClick() {
+				State.setState(game.getGameState());
+			}
+		}));
+
+
 	}
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		for(UIObject o : uiObjects)
+			o.update();
 	}
 
 	@Override
 	public void render(Graphics g) {
-		g.drawRect(100, 100, 100, 100);
+		for(UIObject o : uiObjects)
+			o.render(g);
 	}
 
 }

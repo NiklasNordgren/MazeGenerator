@@ -25,6 +25,8 @@ public class KeyManager implements KeyListener {
 			player.moveUp();
 		if(e.getKeyCode() == KeyEvent.VK_C)
 			player.showSolutionPath();
+		if(e.getKeyCode() == KeyEvent.VK_R)
+			player.resetGame();
 	}
 
 	@Override

@@ -25,12 +25,15 @@ public class Game implements Runnable {
 	private int seconds;
 
 	public Game() {
+		
+		display = new Display();
+		
+		init();
 
 	}
 
 	private void init() {
-		display = new Display();
-
+		
 		gameState = new GameState(this);
 		keyManager = new KeyManager(gameState.getPlayer());
 		menuState = new MenuState(this);
@@ -68,8 +71,6 @@ public class Game implements Runnable {
 
 	@Override
 	public void run() {
-
-		init();
 
 		int fps = 60;
 		double timePerTick = 1000000000 / fps;
@@ -133,15 +134,17 @@ public class Game implements Runnable {
 	}
 	
 	public void resetGame() {
-		gameState.resetGame();
-		keyManager = new KeyManager(gameState.getPlayer());
-		display.getFrame().addKeyListener(keyManager);
+		display.getFrame().removeKeyListener(keyManager);
+		init();
 		seconds = 0;
-		
 	}
 	
 	public int getSeconds() {
 		return seconds;
+	}
+
+	public GameState getGameState() {
+		return gameState;
 	}
 
 }

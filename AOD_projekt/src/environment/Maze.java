@@ -23,8 +23,8 @@ public class Maze {
 
 	private Random random;
 
-	private int mazeWidth = 5;
-	private int mazeHeight = 5;
+	private int mazeWidth = 25;
+	private int mazeHeight = 25;
 
 	private boolean goalIsFound;
 
@@ -44,6 +44,7 @@ public class Maze {
 	}
 
 	private void initializeCells() {
+
 		cells = new Cell[mazeWidth][mazeHeight];
 
 		for(int x = 0; x < cells.length; x++)
@@ -167,8 +168,17 @@ public class Maze {
 
 		//Draw walls
 		for(int x = 0; x < cells.length; x++)
-			for(int y = 0; y < cells[x].length; y++)
-				cells[x][y].drawWalls(g);
+			for(int y = 0; y < cells[x].length; y++) {
+				
+				try {
+					cells[x][y].drawWalls(g);
+				}catch(NullPointerException e) {
+					
+				}
+				
+
+			}
+
 
 		//Fill goal
 		g.setColor(Color.GREEN);

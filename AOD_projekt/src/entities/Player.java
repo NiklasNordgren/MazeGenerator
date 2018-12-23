@@ -40,9 +40,14 @@ public class Player {
 			g.setColor(Color.MAGENTA);
 			for(int x = 0; x < Maze.cells.length; x++)
 				for(int y = 0; y < Maze.cells[x].length; y++) {
-					if(Maze.cells[x][y].isSolution()) {
-						Maze.cells[x][y].fillCell(g);
+					try {
+						if(Maze.cells[x][y].isSolution()) 
+							Maze.cells[x][y].fillCell(g);
+						
+					}catch(NullPointerException e) {
+						
 					}
+					
 				}
 		}
 
@@ -104,6 +109,10 @@ public class Player {
 			JOptionPane.showMessageDialog(dialog, "Winner winner chicken dinner!\nMaze completed in: " + game.getSeconds() + " s");
 			game.resetGame();
 		}	
+	}
+
+	public void resetGame() {
+		game.resetGame();
 	}
 
 }
