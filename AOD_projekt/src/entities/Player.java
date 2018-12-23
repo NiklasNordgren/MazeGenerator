@@ -23,8 +23,8 @@ public class Player {
 
 	public Player(Game game) {
 		this.game = game;
-		this.x = Maze.cells[0][0].getxPixels();
-		this.y = Maze.cells[0][0].getyPixels();
+		this.x = Maze.cells[0][0].getxPixels() + 3;
+		this.y = Maze.cells[0][0].getyPixels() + 3;
 
 		currentCell = Maze.cells[0][0];
 
@@ -52,7 +52,7 @@ public class Player {
 		}
 
 		g.setColor(Color.darkGray);
-		g.fillOval(x+2, y+2, playerSize, playerSize);
+		g.fillOval(x, y, playerSize, playerSize);
 
 	}
 

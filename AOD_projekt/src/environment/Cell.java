@@ -53,7 +53,7 @@ public class Cell {
 	}
 
 	public void fillCell(Graphics g) {
-		g.fillOval(xPixels+2, yPixels+2, CELLSIZE-5, CELLSIZE-5);
+		g.fillOval(xPixels + 3, yPixels + 3, CELLSIZE-5, CELLSIZE-5);
 	}
 
 	public boolean getIsVisited() {
