@@ -12,7 +12,7 @@ import game.Game;
 public class Player {
 
 	private Game game;
-	private int playerSize = Cell.CELLSIZE - 5;
+	private int playerSize = Cell.CELLSIZE - Cell.WALLSIZE - 1;
 	private int x, y;
 	private int speed = Cell.CELLSIZE;
 
@@ -23,8 +23,8 @@ public class Player {
 
 	public Player(Game game) {
 		this.game = game;
-		this.x = Maze.cells[0][0].getxPixels() + 3;
-		this.y = Maze.cells[0][0].getyPixels() + 3;
+		this.x = Maze.cells[0][0].getxPixels() + Cell.WALLSIZE;
+		this.y = Maze.cells[0][0].getyPixels() + Cell.WALLSIZE;
 
 		currentCell = Maze.cells[0][0];
 
@@ -43,11 +43,11 @@ public class Player {
 					try {
 						if(Maze.cells[x][y].isSolution()) 
 							Maze.cells[x][y].fillCell(g);
-						
+
 					}catch(NullPointerException e) {
-						
+
 					}
-					
+
 				}
 		}
 
@@ -101,7 +101,7 @@ public class Player {
 	public void showSolutionPath() {
 		showSolution = !showSolution;
 	}
-	
+
 	public void checkIfGoalIsReached() {
 		if(currentCell == Maze.cells[Maze.cells.length-1][Maze.cells[0].length-1] && !goalIsFound) {
 			goalIsFound = true;

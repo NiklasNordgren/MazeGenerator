@@ -6,6 +6,7 @@ import game.Display;
 public class Cell {
 
 	public static final int CELLSIZE = 30;
+	public static final int WALLSIZE = 5;
 
 	public int[] walls = {1, 1, 1, 1}; //N, S, W, E    1 = wall, 0 = no wall
 
@@ -13,8 +14,8 @@ public class Cell {
 	private int xPixels, yPixels;
 	private boolean isVisited;
 	private boolean isSolution;
+
 	
-	private int wallSize = 3;
 
 	public Cell(int x, int y) {
 		this.x = x;
@@ -24,36 +25,36 @@ public class Cell {
 	}
 
 	public void drawWalls(Graphics g) {
-		
+
 		//North
 		if(walls[0] == 1) {
 			//g.drawLine(xPixels, yPixels, xPixels+CELLSIZE, yPixels);
-			g.fillRect(xPixels, yPixels, CELLSIZE, wallSize);
+			g.fillRect(xPixels, yPixels, CELLSIZE, WALLSIZE);
 		}
-			
+
 		//South
 		if(walls[1] == 1) {
 			//g.drawLine(xPixels, yPixels + CELLSIZE, xPixels + CELLSIZE, yPixels + CELLSIZE);
-			g.fillRect(xPixels, yPixels + CELLSIZE, CELLSIZE, wallSize);
+			g.fillRect(xPixels, yPixels + CELLSIZE, CELLSIZE, WALLSIZE);
 		}
-			
+
 		//West
 		if(walls[2] == 1) {
 			//g.drawLine(xPixels, yPixels, xPixels, yPixels + CELLSIZE);
-			g.fillRect(xPixels, yPixels, wallSize, CELLSIZE);
+			g.fillRect(xPixels, yPixels, WALLSIZE, CELLSIZE);
 		}
-			
+
 		//East
 		if(walls[3] == 1) {
 			//g.drawLine(xPixels + CELLSIZE , yPixels, xPixels + CELLSIZE , yPixels + CELLSIZE);
-			g.fillRect(xPixels + CELLSIZE, yPixels, wallSize, CELLSIZE+wallSize);
+			g.fillRect(xPixels + CELLSIZE, yPixels, WALLSIZE, CELLSIZE+WALLSIZE);
 		}
-		
-			 
+
+
 	}
 
 	public void fillCell(Graphics g) {
-		g.fillOval(xPixels + 3, yPixels + 3, CELLSIZE-5, CELLSIZE-5);
+		g.fillRect(xPixels + WALLSIZE * 2, yPixels + WALLSIZE * 2, CELLSIZE - WALLSIZE * 3, CELLSIZE - WALLSIZE * 3);
 	}
 
 	public boolean getIsVisited() {
