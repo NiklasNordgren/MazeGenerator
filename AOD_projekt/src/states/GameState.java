@@ -7,17 +7,22 @@ import environment.Maze;
 import game.Game;
 
 public class GameState extends State {
-
+	
 	private Player player;
 	private Maze maze;
 	
-	public GameState(Game game) {
+	private int mazeSize;
+	
+	public GameState(Game game, int mazeSize) {
 		super();
+		
+		this.mazeSize = mazeSize;
+		
 		init(game);
 	}
 	
 	private void init(Game game) {
-		maze = new Maze();
+		maze = new Maze(mazeSize);
 		player = new Player(game);
 	}
 	
@@ -35,5 +40,5 @@ public class GameState extends State {
 	public Player getPlayer() {
 		return player;
 	}
-	
+
 }
