@@ -1,6 +1,13 @@
+package game;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.util.Stack;
+
+import gfx.Assets;
+import input.KeyManager;
+import input.MouseManager;
+import states.GameState;
+import states.MenuState;
+import states.State;
 
 public class Game implements Runnable {
 
@@ -8,32 +15,49 @@ public class Game implements Runnable {
 	private boolean running;
 
 	private Display display;
-	private Player player;
+
 	private KeyManager keyManager;
-	
-	private Maze maze;
+	private MouseManager mouseManager;
 
 	private BufferStrategy bs;
 	private Graphics g;
+
+	private GameState gameState;
+	private MenuState menuState;
 	
+	private int seconds;
 
 	public Game() {
+		
+		display = new Display();
+		
+		init();
 
 	}
 
 	private void init() {
-		display = new Display();
-		player = new Player(this, 0, 0);
-
-		maze = new Maze(this);
-	
-		keyManager = new KeyManager(player);
-		display.getFrame().addKeyListener(keyManager);
 		
-
+		Assets.init();
+		
+		menuState = new MenuState(this);
+		gameState = new GameState(this);
+		
+		keyManager = new KeyManager(gameState.getPlayer());
+		mouseManager = new MouseManager();		
+		
+		State.setState(gameState);
+		//State.setState(menuState);
+		
+		display.getCanvas().addMouseMotionListener(mouseManager);
+		display.getCanvas().addMouseListener(mouseManager);
+		
+		display.getFrame().addKeyListener(keyManager);
 	}
 
 	private void update() {
+
+		if(State.getState() != null)
+			State.getState().update();
 
 	}
 
@@ -47,21 +71,17 @@ public class Game implements Runnable {
 		//Clear screen
 		g.clearRect(0, 0, display.getWidth(), display.getHeight());
 		//Draw
-		
-		maze.render(g);
-		player.render(g);
+
+		if(State.getState() != null)
+			State.getState().render(g);
 
 		//End Drawing
 		bs.show();
 		g.dispose();
 	}
 
-
-
 	@Override
 	public void run() {
-
-		init();
 
 		int fps = 60;
 		double timePerTick = 1000000000 / fps;
@@ -70,8 +90,8 @@ public class Game implements Runnable {
 		long lastTime = System.nanoTime();
 		long timer = 0;
 		int updates = 0;
-		
-		int seconds = 1;
+
+		seconds = 1;
 
 		while(running) {
 
@@ -84,17 +104,16 @@ public class Game implements Runnable {
 				update();
 				render();
 
-				updates ++;
+				updates++;
 				delta--;
 			}
 
 			if(timer >= 1000000000) {
 				//display.getFrame().setTitle("fps/updates: " + updates);
-				
-				display.getFrame().setTitle("Seconds: " + seconds);
-				
+				//display.getFrame().setTitle("Seconds: " + seconds);
+
 				seconds++;
-				
+
 				updates = 0;
 				timer = 0;
 			}
@@ -124,12 +143,22 @@ public class Game implements Runnable {
 		}
 	}
 	
-	public int getWidth() {
-		return display.getWidth();
+	public void resetGame() {
+		display.getFrame().removeKeyListener(keyManager);
+		init();
+		seconds = 0;
 	}
 	
-	public int getHeight() {
-		return display.getHeight();
+	public int getSeconds() {
+		return seconds;
+	}
+
+	public GameState getGameState() {
+		return gameState;
+	}
+	
+	public MouseManager getMouseManager() {
+		return mouseManager;
 	}
 
 }

@@ -1,3 +1,4 @@
+package game;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,8 +9,9 @@ public class Display {
 	
 	private JFrame frame;
 	private Canvas canvas;
-	private int width = 800, height = 600;
-	
+
+	public static int width = 1600, height = 900;
+
 	public Display() {
 		
 		Dimension dimension = new Dimension(width, height);

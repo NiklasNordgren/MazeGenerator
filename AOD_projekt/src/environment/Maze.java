@@ -1,66 +1,74 @@
+package environment;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
-public class Maze {
+import game.Game;
 
-	private Game game;
+public class Maze {
 
 	public static Cell[][] cells;
 
+<<<<<<< HEAD:AOD_projekt/src/Maze.java
+=======
+	private Cell currentCell;
+>>>>>>> Niklas:AOD_projekt/src/environment/Maze.java
 	private Cell nextCell;
 
-	private Cell startCell;
 	private Cell goalCell;
+	private Cell startCell;
 
 	private Stack<Cell> stack;
-	private Stack<Cell> path;
-	private ArrayList<Cell> solutionPath;
-
-	private boolean goalIsFound;
 
 	private ArrayList<Cell> neighbours;
 
 	private Random random;
 
-	private int mazeWidth = 20;
-	private int mazeHeight = 20;
+	private int mazeWidth = 25;
+	private int mazeHeight = 25;
 
-	public Maze(Game game) {
-		this.game = game;
+	private boolean goalIsFound;
+
+	public Maze() {
 
 		random = new Random();
 
 		initializeCells();
 
-		goalIsFound = false;
 		stack = new Stack<Cell>();
 
-		startCell = cells[0][0];
+		startCell = cells[cells.length-1][cells[0].length-1];
 
+		goalCell = cells[0][0];
+
+<<<<<<< HEAD:AOD_projekt/src/Maze.java
 		goalCell = cells[cells.length-1][cells[0].length-1];
 
+=======
+>>>>>>> Niklas:AOD_projekt/src/environment/Maze.java
 		createMaze(startCell);
 	}
 
 	private void initializeCells() {
+
 		cells = new Cell[mazeWidth][mazeHeight];
 
 		for(int x = 0; x < cells.length; x++)
-			for(int y = 0; y < cells[x].length; y++)
+			for(int y = 0; y < cells[x].length; y++) 
 				cells[x][y] = new Cell(x, y);
+
 	}
 
 	private void createMaze(Cell currentCell) {
 
-		//Abort if every cell is visited.
 		if(isAllVisited())
 			return;
 		if(currentCell.equals(goalCell) && !goalIsFound)
 			goalIsFound = true;
 
+		this.currentCell = currentCell;
 		currentCell.setVisited(true);
 		neighbours = findNeighbours(currentCell);
 
@@ -68,14 +76,24 @@ public class Maze {
 			nextCell = stack.pop();
 			if(!goalIsFound)
 				currentCell.setSolution(false);
+<<<<<<< HEAD:AOD_projekt/src/Maze.java
 		}else{
 			nextCell = selectRandomNeighbour(neighbours);
 			stack.push(currentCell);
 			if(!goalIsFound)
 				currentCell.setSolution(true);
 
+=======
+		}else {
+			nextCell = selectRandomNeighbour(neighbours);
+			if(!goalIsFound)
+				currentCell.setSolution(true);
+
+			stack.push(currentCell);
+>>>>>>> Niklas:AOD_projekt/src/environment/Maze.java
 			removeWallBetween(currentCell, nextCell);
 		}
+
 		createMaze(nextCell);
 
 	}
@@ -159,11 +177,11 @@ public class Maze {
 
 	}
 
-
 	public void update() {
 
 	}
 
+<<<<<<< HEAD:AOD_projekt/src/Maze.java
 
 	public void drawSolutionPath(Graphics g) {
 		for(int x = 0; x < cells.length; x++)
@@ -174,33 +192,38 @@ public class Maze {
 				}
 			}
 	}
+=======
+>>>>>>> Niklas:AOD_projekt/src/environment/Maze.java
 	public void render(Graphics g) {
 
-		//Fill goalcell
-		g.setColor(Color.blue);
-		goalCell.fillCellGoal(g);
-
 		//Draw walls
-		g.setColor(Color.black);
-		for(int x = 0; x < cells.length; x++)
-			for(int y = 0; y < cells[x].length; y++)
-				cells[x][y].drawWalls(g);
-
-
-		//Draw solution path
-		g.setColor(Color.green);
-		drawSolutionPath(g);
-
-		/*	//Fill all visisted cells
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++) {
-				if(cells[x][y].getIsVisited()) {
-					g.setColor(Color.RED);
-					cells[x][y].fillCell(g);
+				
+				try {
+					cells[x][y].drawWalls(g);
+				}catch(NullPointerException e) {
+					
 				}
+<<<<<<< HEAD:AOD_projekt/src/Maze.java
 			}
 		 */
 
+=======
+				
+
+			}
+
+
+		//Fill goal
+		g.setColor(Color.GREEN);
+		startCell.fillCell(g);
+
+		//Fill start
+		g.setColor(Color.blue);
+		goalCell.fillCell(g);
+>>>>>>> Niklas:AOD_projekt/src/environment/Maze.java
 
 	}
+
 }
