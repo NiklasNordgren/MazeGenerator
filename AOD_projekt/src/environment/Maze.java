@@ -195,10 +195,6 @@ public class Maze {
 
 		}
 
-
-
-
-
 		//Fill goal
 		g.setColor(Color.GREEN);
 		startCell.fillCell(g);
@@ -208,5 +204,5 @@ public class Maze {
 		goalCell.fillCell(g);
 
 	}
-
 }
+
