@@ -1,7 +1,7 @@
 package game;
+
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-
 import entities.Player;
 import gfx.Assets;
 import input.KeyManager;
@@ -26,25 +26,32 @@ public class Game implements Runnable {
 	private GameState gameState;
 	private MenuState menuState;
 	
+<<<<<<< HEAD
 	private int seconds, tenSecs, hundredSecs;
+=======
+	private int seconds;
+	private int mazeSize = 27;
+>>>>>>> Niklas
 
 	public Game() {
 		
 		display = new Display(this);
 		
-		init();
+		init(27);
 
 	}
 
-	private void init() {
-		
-		Assets.init();
+	private void init(int mazeSize) {
 		
 		menuState = new MenuState(this);
-		gameState = new GameState(this);
+		gameState = new GameState(this, mazeSize);
 		
 		keyManager = new KeyManager(gameState.getPlayer());
+<<<<<<< HEAD
 			
+=======
+		//mouseManager = new MouseManager();		
+>>>>>>> Niklas
 		
 		State.setState(gameState);
 		//State.setState(menuState);
@@ -152,7 +159,7 @@ public class Game implements Runnable {
 		display.getFrame().removeKeyListener(keyManager);
 		display.getCanvas().removeKeyListener(keyManager);
 		
-		init();
+		init(mazeSize);
 		seconds = 0;
 	}
 	
@@ -170,6 +177,10 @@ public class Game implements Runnable {
 	
 	public MouseManager getMouseManager() {
 		return mouseManager;
+	}
+
+	public void setMazeSize(int mazeSize) {
+		this.mazeSize = mazeSize;
 	}
 
 }
