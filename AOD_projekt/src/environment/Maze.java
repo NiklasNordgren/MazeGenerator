@@ -23,13 +23,22 @@ public class Maze {
 
 	private Random random;
 
-	private int mazeWidth = 25;
-	private int mazeHeight = 25;
+	private int mazeWidth;
+	private int mazeHeight;
 
 	private boolean goalIsFound;
 
-	public Maze() {
+	public Maze(int size) {
 
+		mazeWidth = size;
+		mazeHeight = size;
+		
+		init();
+		
+	}
+	
+	private void init() {
+		
 		random = new Random();
 
 		initializeCells();
@@ -166,18 +175,24 @@ public class Maze {
 
 	public void render(Graphics g) {
 
-		//Draw walls
-		for(int x = 0; x < cells.length; x++)
-			for(int y = 0; y < cells[x].length; y++) {
+		try {
+			
+			//Draw walls
+			for(int x = 0; x < cells.length; x++)
+				for(int y = 0; y < cells[x].length; y++) {
 
-				try {
-					cells[x][y].drawWalls(g);
-				}catch(NullPointerException e) {
+					try {
+						cells[x][y].drawWalls(g);
+					}catch(NullPointerException e) {
+
+					}
 
 				}
-
-
-			}
+			
+		}catch(ArrayIndexOutOfBoundsException e) {
+		
+		}
+		
 
 
 		//Fill goal
