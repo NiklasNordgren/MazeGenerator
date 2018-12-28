@@ -38,12 +38,6 @@ public class Game implements Runnable {
 	}
 
 	private void init() {
-		display = new Display();
-		player = new Player(this);
-
-		maze = new Maze();
-
-		keyManager = new KeyManager(player);
 
 		gameState = new GameState(this);
 		keyManager = new KeyManager(gameState.getPlayer());

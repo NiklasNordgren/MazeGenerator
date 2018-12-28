@@ -15,8 +15,6 @@ public class Cell {
 	private boolean isVisited;
 	private boolean isSolution;
 
-	
-
 	public Cell(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -49,8 +47,6 @@ public class Cell {
 			//g.drawLine(xPixels + CELLSIZE , yPixels, xPixels + CELLSIZE , yPixels + CELLSIZE);
 			g.fillRect(xPixels + CELLSIZE, yPixels, WALLSIZE, CELLSIZE+WALLSIZE);
 		}
-
-
 	}
 
 	public void fillCell(Graphics g) {
@@ -88,5 +84,4 @@ public class Cell {
 	public int getyPixels() {
 		return yPixels;
 	}
-
 }
