@@ -74,6 +74,7 @@ public class Maze {
 				currentCell.setSolution(true);
 
 			stack.push(currentCell);
+
 			removeWallBetween(currentCell, nextCell);
 		}
 
@@ -175,7 +176,6 @@ public class Maze {
 				}catch(NullPointerException e) {
 
 				}
-
 
 			}
 
