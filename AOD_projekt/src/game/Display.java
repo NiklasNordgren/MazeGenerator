@@ -22,14 +22,10 @@ public class Display {
 
 	private JFrame frame;
 	private Canvas canvas;
-<<<<<<< HEAD
-	
+
 	private JLabel secondsLabel;
-	private JButton buttonReset, buttonShowPath;
-=======
 
 	private JButton buttonCreateMap, buttonReset, buttonShowPath;
->>>>>>> Niklas
 	private JPanel panel;
 	
 
@@ -82,8 +78,7 @@ public class Display {
 
 		c.insets = new Insets(10, 10, 10, 10);
 		c.fill = GridBagConstraints.HORIZONTAL;
-<<<<<<< HEAD
-		
+
 		c.gridx = 0;
 		c.gridy = 0;
 		secondsLabel = new JLabel("Time: 0.0");
@@ -92,10 +87,9 @@ public class Display {
 		panel.add(secondsLabel, c);
 		c.gridy++;
 	
-=======
 
 		c.gridy++;
->>>>>>> Niklas
+
 		panel.add(buttonReset, c);
 
 		c.gridy++;
