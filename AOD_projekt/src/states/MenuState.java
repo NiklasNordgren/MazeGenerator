@@ -3,6 +3,7 @@ package states;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import game.Display;
 import game.Game;
 import gfx.Assets;
 import ui.ClickListener;
@@ -22,7 +23,7 @@ public class MenuState extends State {
 	private void init() {
 		uiObjects = new ArrayList<>();
 
-		uiObjects.add(new UIImageButton(64, 64, 64, 64, Assets.btn_start, new ClickListener() {
+		uiObjects.add(new UIImageButton(Display.width / 2, Display.height / 2, 64, 32, Assets.btn_start, new ClickListener() {
 
 			@Override
 			public void onClick() {

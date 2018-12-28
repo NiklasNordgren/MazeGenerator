@@ -10,7 +10,7 @@ public class Assets {
 
 	public static void init() {
 
-		SpriteSheet menuSheet = new SpriteSheet(ImageLoader.loadImage("res/menu.png"));
+		SpriteSheet menuSheet = new SpriteSheet(ImageLoader.loadImage("/menu.png"));
 		
 		btn_start = new BufferedImage[2];
 		btn_start[0] = menuSheet.crop(0, 0, width*2, height);

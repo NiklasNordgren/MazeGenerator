@@ -3,15 +3,11 @@ package states;
 import java.awt.Graphics;
 
 import entities.Player;
-import environment.Cell;
 import environment.Maze;
-import game.Display;
 import game.Game;
 
 public class GameState extends State {
-	
-	private Game game;
-	
+
 	private Player player;
 	private Maze maze;
 	
@@ -21,7 +17,6 @@ public class GameState extends State {
 	}
 	
 	private void init(Game game) {
-		this.game = game;
 		maze = new Maze();
 		player = new Player(game);
 	}

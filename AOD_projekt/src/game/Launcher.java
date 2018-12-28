@@ -5,7 +5,7 @@ public class Launcher {
 		
 		Game game = new Game();
 		game.start();
-		
+	
 	}
 
 }
