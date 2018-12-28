@@ -94,7 +94,7 @@ public class Game implements Runnable {
 		long timer = 0;
 		int updates = 0;
 
-		seconds = 50;
+		seconds = 0;
 
 		while(running) {
 

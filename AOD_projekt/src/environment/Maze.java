@@ -32,13 +32,13 @@ public class Maze {
 
 		mazeWidth = size;
 		mazeHeight = size;
-		
+
 		init();
-		
+
 	}
-	
+
 	private void init() {
-		
+
 		random = new Random();
 
 		initializeCells();
@@ -83,6 +83,7 @@ public class Maze {
 				currentCell.setSolution(true);
 
 			stack.push(currentCell);
+
 			removeWallBetween(currentCell, nextCell);
 		}
 
@@ -176,7 +177,7 @@ public class Maze {
 	public void render(Graphics g) {
 
 		try {
-			
+
 			//Draw walls
 			for(int x = 0; x < cells.length; x++)
 				for(int y = 0; y < cells[x].length; y++) {
@@ -185,15 +186,14 @@ public class Maze {
 						cells[x][y].drawWalls(g);
 					}catch(NullPointerException e) {
 
+
 					}
 
 				}
-			
-		}catch(ArrayIndexOutOfBoundsException e) {
-		
-		}
-		
 
+		}catch(ArrayIndexOutOfBoundsException e) {
+
+		}
 
 		//Fill goal
 		g.setColor(Color.GREEN);
@@ -205,4 +205,7 @@ public class Maze {
 
 	}
 
+
+
 }
+
