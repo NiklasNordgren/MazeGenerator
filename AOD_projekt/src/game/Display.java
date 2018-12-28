@@ -28,6 +28,8 @@ public class Display {
 	private JButton buttonCreateMap, buttonReset, buttonShowPath;
 	private JPanel panel;
 	
+	private Dimension dimensionButton;
+	
 
 	private JRadioButton radioButton1, radioButton2, radioButton3;
 
@@ -49,10 +51,12 @@ public class Display {
 		frame.setLayout(new GridBagLayout());
 
 		GridBagConstraints c = new GridBagConstraints();
+		dimensionButton = new Dimension(140, 25);
 
 		buttonReset = new JButton("Reset");
 		buttonReset.setMnemonic(KeyEvent.VK_R);
 		buttonReset.setFocusable(false);
+		buttonReset.setPreferredSize(dimensionButton);
 		buttonReset.addActionListener(new ActionListener() {
 
 			@Override
@@ -64,6 +68,7 @@ public class Display {
 		buttonShowPath = new JButton("Show path");
 		buttonShowPath.setMnemonic(KeyEvent.VK_S);
 		buttonShowPath.setFocusable(false);
+		buttonShowPath.setPreferredSize(dimensionButton);
 		buttonShowPath.addActionListener(new ActionListener() {
 
 			@Override
@@ -74,10 +79,12 @@ public class Display {
 
 		panel = new JPanel(new GridBagLayout());
 		panel.setBackground(Color.WHITE);
+		panel.setMaximumSize(new Dimension(width / 3, height));
+		panel.setPreferredSize(new Dimension(width / 3, height));
 		panel.setFocusable(false);
 
 		c.insets = new Insets(10, 10, 10, 10);
-		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.CENTER;
 
 		c.gridx = 0;
 		c.gridy = 0;
@@ -115,8 +122,6 @@ public class Display {
 		group.add(radioButton2);
 		group.add(radioButton3);
 
-		c.fill = GridBagConstraints.HORIZONTAL;
-
 		c.gridy++;
 		panel.add(new JLabel("Maze size:"), c);
 
@@ -131,6 +136,7 @@ public class Display {
 
 		buttonCreateMap = new JButton("Create new maze");
 		buttonCreateMap.setFocusable(false);
+		buttonCreateMap.setPreferredSize(dimensionButton);
 		buttonCreateMap.addActionListener(new ActionListener() {
 
 			@Override
