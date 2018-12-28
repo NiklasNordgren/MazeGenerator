@@ -11,10 +11,7 @@ public class Maze {
 
 	public static Cell[][] cells;
 
-<<<<<<< HEAD:AOD_projekt/src/Maze.java
-=======
 	private Cell currentCell;
->>>>>>> Niklas:AOD_projekt/src/environment/Maze.java
 	private Cell nextCell;
 
 	private Cell goalCell;
@@ -43,11 +40,6 @@ public class Maze {
 
 		goalCell = cells[0][0];
 
-<<<<<<< HEAD:AOD_projekt/src/Maze.java
-		goalCell = cells[cells.length-1][cells[0].length-1];
-
-=======
->>>>>>> Niklas:AOD_projekt/src/environment/Maze.java
 		createMaze(startCell);
 	}
 
@@ -76,21 +68,13 @@ public class Maze {
 			nextCell = stack.pop();
 			if(!goalIsFound)
 				currentCell.setSolution(false);
-<<<<<<< HEAD:AOD_projekt/src/Maze.java
-		}else{
-			nextCell = selectRandomNeighbour(neighbours);
-			stack.push(currentCell);
-			if(!goalIsFound)
-				currentCell.setSolution(true);
-
-=======
 		}else {
 			nextCell = selectRandomNeighbour(neighbours);
 			if(!goalIsFound)
 				currentCell.setSolution(true);
 
 			stack.push(currentCell);
->>>>>>> Niklas:AOD_projekt/src/environment/Maze.java
+
 			removeWallBetween(currentCell, nextCell);
 		}
 
@@ -181,36 +165,17 @@ public class Maze {
 
 	}
 
-<<<<<<< HEAD:AOD_projekt/src/Maze.java
-
-	public void drawSolutionPath(Graphics g) {
-		for(int x = 0; x < cells.length; x++)
-			for(int y = 0; y < cells[x].length; y++) {
-				if(cells[x][y].isSolution()) {
-
-					cells[x][y].fillCellGoal(g);
-				}
-			}
-	}
-=======
->>>>>>> Niklas:AOD_projekt/src/environment/Maze.java
 	public void render(Graphics g) {
 
 		//Draw walls
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++) {
-				
+
 				try {
 					cells[x][y].drawWalls(g);
 				}catch(NullPointerException e) {
-					
-				}
-<<<<<<< HEAD:AOD_projekt/src/Maze.java
-			}
-		 */
 
-=======
-				
+				}
 
 			}
 
@@ -222,7 +187,6 @@ public class Maze {
 		//Fill start
 		g.setColor(Color.blue);
 		goalCell.fillCell(g);
->>>>>>> Niklas:AOD_projekt/src/environment/Maze.java
 
 	}
 

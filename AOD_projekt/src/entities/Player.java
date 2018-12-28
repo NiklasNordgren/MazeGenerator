@@ -36,6 +36,7 @@ public class Player {
 
 	public void render(Graphics g) {
 
+		
 		if(showSolution) {
 			g.setColor(Color.MAGENTA);
 			for(int x = 0; x < Maze.cells.length; x++)
@@ -50,6 +51,7 @@ public class Player {
 
 				}
 		}
+		
 
 		g.setColor(Color.darkGray);
 		g.fillOval(x, y, playerSize, playerSize);
