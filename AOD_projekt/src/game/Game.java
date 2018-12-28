@@ -26,7 +26,7 @@ public class Game implements Runnable {
 	private GameState gameState;
 	private MenuState menuState;
 	
-	private int seconds;
+	private int seconds, tenSecs, hundredSecs;
 
 	public Game() {
 		
@@ -44,7 +44,7 @@ public class Game implements Runnable {
 		gameState = new GameState(this);
 		
 		keyManager = new KeyManager(gameState.getPlayer());
-		mouseManager = new MouseManager();		
+			
 		
 		State.setState(gameState);
 		//State.setState(menuState);
@@ -93,7 +93,7 @@ public class Game implements Runnable {
 		long timer = 0;
 		int updates = 0;
 
-		seconds = 1;
+		seconds = 50;
 
 		while(running) {
 
@@ -101,6 +101,13 @@ public class Game implements Runnable {
 			timer += now - lastTime;
 			delta += (now - lastTime) / timePerTick;
 			lastTime = now;
+			tenSecs = (int) (timer / 100000000);
+			int minutes = seconds/60;
+			
+			if(minutes > 0) {
+				display.setTime("Time: " + minutes + " m " + seconds % 60 + "." + tenSecs + " s");
+			}else
+				display.setTime("Time: "+ seconds + "."+ tenSecs  + " s");
 
 			if(delta >= 1) {
 				update();
@@ -111,19 +118,15 @@ public class Game implements Runnable {
 			}
 
 			if(timer >= 1000000000) {
-				//display.getFrame().setTitle("fps/updates: " + updates);
-				display.getFrame().setTitle("Seconds: " + seconds);
-
+				
+				
 				seconds++;
 
 				updates = 0;
 				timer = 0;
 			}
-
 		}
-
 		stop();
-
 	}
 
 	public synchronized void start() {

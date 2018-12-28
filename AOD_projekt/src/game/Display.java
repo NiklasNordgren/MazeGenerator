@@ -3,6 +3,7 @@ package game;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -12,6 +13,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Display {
@@ -21,8 +23,10 @@ public class Display {
 	private JFrame frame;
 	private Canvas canvas;
 	
+	private JLabel secondsLabel;
 	private JButton buttonReset, buttonShowPath;
 	private JPanel panel;
+	
 
 	public static int width = 1200, height = 900;
 
@@ -31,7 +35,7 @@ public class Display {
 
 		Dimension dimension = new Dimension(width, height);
 
-		frame = new JFrame("title");
+		frame = new JFrame("A-MAZE-ing");
 		frame.setMinimumSize(dimension);
 		frame.setMaximumSize(dimension);
 		frame.setResizable(false);
@@ -75,6 +79,11 @@ public class Display {
 		
 		c.gridx = 0;
 		c.gridy = 0;
+		secondsLabel = new JLabel("Time: 0.0");
+		secondsLabel.setFont(new Font("Arial",Font.BOLD, 55));
+		
+		panel.add(secondsLabel, c);
+		c.gridy++;
 	
 		panel.add(buttonReset, c);
 		
@@ -119,5 +128,7 @@ public class Display {
 	public int getHeight() {
 		return height;
 	}
-
+	public void setTime(String text) {
+		secondsLabel.setText(text);
+	}
 }
