@@ -2,6 +2,7 @@ package game;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import entities.Player;
 import gfx.Assets;
 import input.KeyManager;
 import input.MouseManager;
@@ -29,7 +30,7 @@ public class Game implements Runnable {
 
 	public Game() {
 		
-		display = new Display();
+		display = new Display(this);
 		
 		init();
 
@@ -48,10 +49,11 @@ public class Game implements Runnable {
 		State.setState(gameState);
 		//State.setState(menuState);
 		
-		display.getCanvas().addMouseMotionListener(mouseManager);
-		display.getCanvas().addMouseListener(mouseManager);
+		//display.getCanvas().addMouseMotionListener(mouseManager);
+		//display.getCanvas().addMouseListener(mouseManager);
 		
 		display.getFrame().addKeyListener(keyManager);
+		display.getCanvas().addKeyListener(keyManager);
 	}
 
 	private void update() {
@@ -110,7 +112,7 @@ public class Game implements Runnable {
 
 			if(timer >= 1000000000) {
 				//display.getFrame().setTitle("fps/updates: " + updates);
-				//display.getFrame().setTitle("Seconds: " + seconds);
+				display.getFrame().setTitle("Seconds: " + seconds);
 
 				seconds++;
 
@@ -145,6 +147,8 @@ public class Game implements Runnable {
 	
 	public void resetGame() {
 		display.getFrame().removeKeyListener(keyManager);
+		display.getCanvas().removeKeyListener(keyManager);
+		
 		init();
 		seconds = 0;
 	}
@@ -155,6 +159,10 @@ public class Game implements Runnable {
 
 	public GameState getGameState() {
 		return gameState;
+	}
+	
+	public Player getPlayer() {
+		return gameState.getPlayer();
 	}
 	
 	public MouseManager getMouseManager() {

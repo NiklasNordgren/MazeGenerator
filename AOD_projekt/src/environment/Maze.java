@@ -169,13 +169,13 @@ public class Maze {
 		//Draw walls
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++) {
-				
+
 				try {
 					cells[x][y].drawWalls(g);
 				}catch(NullPointerException e) {
-					
+
 				}
-				
+
 
 			}
 
