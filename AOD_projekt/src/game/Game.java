@@ -30,7 +30,6 @@ public class Game implements Runnable {
 
 	private int mazeSize = 27;
 
-
 	public Game() {
 		
 		display = new Display(this);
@@ -45,7 +44,6 @@ public class Game implements Runnable {
 		gameState = new GameState(this, mazeSize);
 		
 		keyManager = new KeyManager(gameState.getPlayer());
-		
 		State.setState(gameState);
 		//State.setState(menuState);
 		
@@ -93,7 +91,7 @@ public class Game implements Runnable {
 		long timer = 0;
 		int updates = 0;
 
-		seconds = 50;
+		seconds = 0;
 
 		while(running) {
 

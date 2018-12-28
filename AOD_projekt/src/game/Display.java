@@ -22,14 +22,14 @@ public class Display {
 
 	private JFrame frame;
 	private Canvas canvas;
-	
 	private JLabel secondsLabel;
 
 	private JButton buttonCreateMap, buttonReset, buttonShowPath;
 
 	private JPanel panel;
 	
-
+	private Dimension dimensionButton;
+	
 	private JRadioButton radioButton1, radioButton2, radioButton3;
 
 	public static int width = 1200, height = 900;
@@ -50,10 +50,12 @@ public class Display {
 		frame.setLayout(new GridBagLayout());
 
 		GridBagConstraints c = new GridBagConstraints();
+		dimensionButton = new Dimension(140, 25);
 
 		buttonReset = new JButton("Reset");
 		buttonReset.setMnemonic(KeyEvent.VK_R);
 		buttonReset.setFocusable(false);
+		buttonReset.setPreferredSize(dimensionButton);
 		buttonReset.addActionListener(new ActionListener() {
 
 			@Override
@@ -65,6 +67,7 @@ public class Display {
 		buttonShowPath = new JButton("Show path");
 		buttonShowPath.setMnemonic(KeyEvent.VK_S);
 		buttonShowPath.setFocusable(false);
+		buttonShowPath.setPreferredSize(dimensionButton);
 		buttonShowPath.addActionListener(new ActionListener() {
 
 			@Override
@@ -75,11 +78,15 @@ public class Display {
 
 		panel = new JPanel(new GridBagLayout());
 		panel.setBackground(Color.WHITE);
+		panel.setMaximumSize(new Dimension(width / 3, height));
+		panel.setPreferredSize(new Dimension(width / 3, height));
 		panel.setFocusable(false);
 
 		c.insets = new Insets(10, 10, 10, 10);
-		c.fill = GridBagConstraints.HORIZONTAL;
-		
+
+		c.anchor = GridBagConstraints.CENTER;
+
+
 		c.gridx = 0;
 		c.gridy = 0;
 		secondsLabel = new JLabel("Time: 0.0");
@@ -87,7 +94,6 @@ public class Display {
 		
 		panel.add(secondsLabel, c);
 		c.gridy++;
-
 
 		panel.add(buttonReset, c);
 
@@ -114,8 +120,6 @@ public class Display {
 		group.add(radioButton2);
 		group.add(radioButton3);
 
-		c.fill = GridBagConstraints.HORIZONTAL;
-
 		c.gridy++;
 		panel.add(new JLabel("Maze size:"), c);
 
@@ -130,6 +134,7 @@ public class Display {
 
 		buttonCreateMap = new JButton("Create new maze");
 		buttonCreateMap.setFocusable(false);
+		buttonCreateMap.setPreferredSize(dimensionButton);
 		buttonCreateMap.addActionListener(new ActionListener() {
 
 			@Override
@@ -148,9 +153,7 @@ public class Display {
 				else if(actionCommand.equals("7 x 7")) {
 					game.setMazeSize(7);
 					game.resetGame();
-					
 				}
-					
 			}
 		});
 
