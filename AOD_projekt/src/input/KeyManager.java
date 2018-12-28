@@ -1,5 +1,9 @@
+package input;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import entities.Player;
 
 public class KeyManager implements KeyListener {
 	
@@ -19,6 +23,10 @@ public class KeyManager implements KeyListener {
 			player.moveDown();
 		if(e.getKeyCode() == KeyEvent.VK_UP|| e.getKeyCode() == KeyEvent.VK_W)
 			player.moveUp();
+		if(e.getKeyCode() == KeyEvent.VK_C)
+			player.showSolutionPath();
+		if(e.getKeyCode() == KeyEvent.VK_R)
+			player.resetGame();
 	}
 
 	@Override

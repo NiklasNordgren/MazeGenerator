@@ -1,3 +1,4 @@
+package game;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,18 +13,13 @@ public class Display {
 	
 	private JFrame frame;
 	private Canvas canvas;
-	private JPanel panel, panel2;
-	private JButton button; 
-	private int width = 800, height = 600;
-	
+
+	public static int width = 1600, height = 900;
+
 	public Display() {
 		
 		Dimension dimension = new Dimension(width, height);
-		button = new JButton("hello");
-		panel = new JPanel(new FlowLayout());
-		panel2 = new JPanel(new FlowLayout());
-		FlowLayout lay = new FlowLayout();
-		
+	
 		frame = new JFrame("title");
 		frame.setMinimumSize(dimension);
 		frame.setMaximumSize(dimension);
@@ -40,12 +36,7 @@ public class Display {
 
 		canvas.setBackground(Color.WHITE);
 	
-		panel2.add(canvas);
-		panel.add(button);
-	
-		
-		frame.add(panel);
-		frame.add(panel2);
+		frame.add(canvas);
 		
 		frame.pack();
 		

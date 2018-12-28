@@ -1,6 +1,13 @@
+package game;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.util.Stack;
+
+import entities.Player;
+import environment.Maze;
+import input.KeyManager;
+import states.GameState;
+import states.MenuState;
+import states.State;
 
 public class Game implements Runnable {
 
@@ -8,32 +15,50 @@ public class Game implements Runnable {
 	private boolean running;
 
 	private Display display;
-	private Player player;
+
 	private KeyManager keyManager;
 
 	private Maze maze;
+	
+	private Player player;
 
 	private BufferStrategy bs;
 	private Graphics g;
 	private int seconds;
 
+	private GameState gameState;
+	private MenuState menuState;
 
 	public Game() {
+		
+		display = new Display();
+		
+		init();
 
 	}
 
 	private void init() {
 		display = new Display();
-		player = new Player(this, 0, 0);
+		player = new Player(this);
 
-		maze = new Maze(this, player);
+		maze = new Maze();
 
 		keyManager = new KeyManager(player);
+
+		gameState = new GameState(this);
+		keyManager = new KeyManager(gameState.getPlayer());
+		menuState = new MenuState(this);
+		State.setState(gameState);
+		//State.setState(menuState);
+
 		display.getFrame().addKeyListener(keyManager);
 	}
 
 	private void update() {
 		maze.update();
+
+		if(State.getState() != null)
+			State.getState().update();
 
 	}
 
@@ -46,22 +71,24 @@ public class Game implements Runnable {
 		g = bs.getDrawGraphics();
 		//Clear screen
 		g.clearRect(0, 0, display.getWidth(), display.getHeight());
-		
-		//Draw
-		maze.render(g);
-		player.render(g);
 
+		
+/*		//Draw
+		maze.render(g);
+		player.render(g); */
+
+		//Draw
+
+		if(State.getState() != null)
+			State.getState().render(g);
+		
 		//End Drawing
 		bs.show();
 		g.dispose();
 	}
 
-
-
 	@Override
 	public void run() {
-
-		init();
 
 		int fps = 60;
 		double timePerTick = 1000000000 / fps;
@@ -84,7 +111,7 @@ public class Game implements Runnable {
 				update();
 				render();
 
-				updates ++;
+				updates++;
 				delta--;
 			}
 
@@ -102,10 +129,6 @@ public class Game implements Runnable {
 
 		stop();
 
-	}
-
-	public int getSeconds() {
-		return seconds;
 	}
 	
 	public synchronized void start() {
@@ -133,5 +156,19 @@ public class Game implements Runnable {
 
 	public int getHeight() {
 		return display.getHeight();
+	}
+	
+	public void resetGame() {
+		display.getFrame().removeKeyListener(keyManager);
+		init();
+		seconds = 0;
+	}
+	
+	public int getSeconds() {
+		return seconds;
+	}
+
+	public GameState getGameState() {
+		return gameState;
 	}
 }

@@ -1,11 +1,15 @@
+package environment;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
-
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+
+import entities.Player;
+import game.Game;
 
 public class Maze {
 
@@ -23,19 +27,18 @@ public class Maze {
 
 	private boolean solutionPathIsFound, goalIsFound;
 
-
 	private ArrayList<Cell> neighbours;
-
 	private Random random;
 
-	private int mazeWidth = 10;
-	private int mazeHeight = 10;
-
 	private int level = 3;
+	private int mazeWidth = 25;
+	private int mazeHeight = 25;
 
-	public Maze(Game game, Player player) {
-		this.game = game;
-		this.player = player;
+	/*	public Maze(Game game, Player player) {
+			this.game = game;
+			this.player = player;
+		}*/
+	public Maze() {
 
 		random = new Random();
 		random.setSeed(level);
@@ -43,6 +46,7 @@ public class Maze {
 		initializeCells();
 
 		solutionPathIsFound = false;
+
 		stack = new Stack<Cell>();
 
 		goalCell = cells[0][0];
@@ -54,11 +58,13 @@ public class Maze {
 	}
 
 	private void initializeCells() {
+
 		cells = new Cell[mazeWidth][mazeHeight];
 
 		for(int x = 0; x < cells.length; x++)
-			for(int y = 0; y < cells[x].length; y++)
+			for(int y = 0; y < cells[x].length; y++) 
 				cells[x][y] = new Cell(x, y);
+
 	}
 
 	private void createMaze(Cell currentCell) {
@@ -74,18 +80,25 @@ public class Maze {
 
 		if(neighbours.size() == 0) {
 			nextCell = stack.pop();
-			if(!solutionPathIsFound)
-				currentCell.setSolution(false);
-		}else{
-			nextCell = selectRandomNeighbour(neighbours);
-			stack.push(currentCell);
-			if(!solutionPathIsFound)
-				currentCell.setSolution(true);
 
-			removeWallBetween(currentCell, nextCell);
+			if(!solutionPathIsFound) 
+				currentCell.setSolution(false);
+					
+			else {
+				nextCell = selectRandomNeighbour(neighbours);
+				if(!goalIsFound)
+					currentCell.setSolution(true);
+
+				stack.push(currentCell);
+				removeWallBetween(currentCell, nextCell);
+			}/*	else{
+					nextCell = selectRandomNeighbour(neighbours);
+					stack.push(currentCell);
+					if(!solutionPathIsFound)
+						currentCell.setSolution(true);
+				}	*/	
 		}
 		createMaze(nextCell);
-
 	}
 
 	private boolean isAllVisited() {
@@ -176,7 +189,7 @@ public class Maze {
 				JDialog dialog = new JDialog();
 				JOptionPane.showMessageDialog(dialog, 
 						"Congratulations! Your time is: "
-						+ game.getSeconds() + " seconds.");
+								+ game.getSeconds() + " seconds.");
 			}
 		}
 	}
@@ -186,7 +199,7 @@ public class Maze {
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++) 
 				if(cells[x][y].isSolution()) 
-					cells[x][y].fillCellGoal(g);
+					cells[x][y].fillCell(g);
 
 	}
 	public void render(Graphics g) {
@@ -197,24 +210,44 @@ public class Maze {
 			for(int y = 0; y < cells[x].length; y++)
 				cells[x][y].drawWalls(g);
 
-	/*	//Draw solution path
+		/*	//Draw solution path
 		g.setColor(Color.green);
 		drawSolutionPath(g); */
 
 		//Fill goalcell
 		g.setColor(Color.blue);
-		startCell.fillCellGoal(g);
+		startCell.fillCell(g);
+
+
+		/*	//Fill goal
+		g.setColor(Color.GREEN);
+		startCell.fillCell(g);
+
+		//Fill start
+		g.setColor(Color.blue);
+		goalCell.fillCell(g);
 
 
 
 		/*	//Fill all visisted cells
+=======
+	public void render(Graphics g) {
+
+		//Draw walls
+>>>>>>> Niklas:AOD_projekt/src/environment/Maze.java
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++) {
-				if(cells[x][y].getIsVisited()) {
-					g.setColor(Color.RED);
-					cells[x][y].fillCell(g);
+
+				try {
+					cells[x][y].drawWalls(g);
+				}catch(NullPointerException e) {
+
 				}
+<<<<<<< HEAD:AOD_projekt/src/Maze.java
 			}
 		 */
 	}
+
 }
+
+
