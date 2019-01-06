@@ -30,18 +30,19 @@ public class Maze {
 	private ArrayList<Cell> neighbours;
 	private Random random;
 
-	private int level = 3;
-	private int mazeWidth = 25;
-	private int mazeHeight = 25;
+	private int mazeWidth;
+	private int mazeHeight;
 
-	/*	public Maze(Game game, Player player) {
-			this.game = game;
-			this.player = player;
-		}*/
-	public Maze() {
+	public Maze(int size) {
 
-		random = new Random();
-		random.setSeed(level);
+		mazeWidth = size;
+		mazeHeight = size;
+
+		init();
+
+	}
+
+	private void init() {
 
 		initializeCells();
 
@@ -83,7 +84,7 @@ public class Maze {
 
 			if(!solutionPathIsFound) 
 				currentCell.setSolution(false);
-					
+
 			else {
 				nextCell = selectRandomNeighbour(neighbours);
 				if(!goalIsFound)
@@ -91,12 +92,7 @@ public class Maze {
 
 				stack.push(currentCell);
 				removeWallBetween(currentCell, nextCell);
-			}/*	else{
-					nextCell = selectRandomNeighbour(neighbours);
-					stack.push(currentCell);
-					if(!solutionPathIsFound)
-						currentCell.setSolution(true);
-				}	*/	
+			}
 		}
 		createMaze(nextCell);
 	}
@@ -204,20 +200,29 @@ public class Maze {
 	}
 	public void render(Graphics g) {
 
-		//Draw walls
-		g.setColor(Color.black);
-		for(int x = 0; x < cells.length; x++)
-			for(int y = 0; y < cells[x].length; y++)
-				cells[x][y].drawWalls(g);
-
-		/*	//Draw solution path
-		g.setColor(Color.green);
-		drawSolutionPath(g); */
-
 		//Fill goalcell
 		g.setColor(Color.blue);
 		startCell.fillCell(g);
 
+		try {
+
+			//Draw walls
+			for(int x = 0; x < cells.length; x++)
+				for(int y = 0; y < cells[x].length; y++) {
+
+					try {
+						cells[x][y].drawWalls(g);
+					}catch(NullPointerException e) {
+
+
+					}
+
+				}
+
+		}catch(ArrayIndexOutOfBoundsException e) {
+
+
+		}
 
 		/*	//Fill goal
 		g.setColor(Color.GREEN);
@@ -249,5 +254,4 @@ public class Maze {
 	}
 
 }
-
 

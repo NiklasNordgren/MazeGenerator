@@ -3,26 +3,26 @@ package states;
 import java.awt.Graphics;
 
 import entities.Player;
-import environment.Cell;
 import environment.Maze;
-import game.Display;
 import game.Game;
 
 public class GameState extends State {
 	
-	private Game game;
-	
 	private Player player;
 	private Maze maze;
 	
-	public GameState(Game game) {
+	private int mazeSize;
+	
+	public GameState(Game game, int mazeSize) {
 		super();
+		
+		this.mazeSize = mazeSize;
+		
 		init(game);
 	}
 	
 	private void init(Game game) {
-		this.game = game;
-		maze = new Maze();
+		maze = new Maze(mazeSize);
 		player = new Player(game);
 	}
 	
@@ -40,5 +40,5 @@ public class GameState extends State {
 	public Player getPlayer() {
 		return player;
 	}
-	
+
 }

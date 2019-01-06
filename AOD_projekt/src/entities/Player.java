@@ -15,6 +15,7 @@ public class Player {
 	private int playerSize = Cell.CELLSIZE - Cell.WALLSIZE - 1;
 	private int x, y;
 	private int speed = Cell.CELLSIZE;
+	private boolean cheat = false;
 
 	private Cell currentCell;
 
@@ -36,6 +37,7 @@ public class Player {
 
 	public void render(Graphics g) {
 
+		
 		if(showSolution) {
 			g.setColor(Color.MAGENTA);
 			for(int x = 0; x < Maze.cells.length; x++)
@@ -50,6 +52,7 @@ public class Player {
 
 				}
 		}
+		
 
 		g.setColor(Color.darkGray);
 		g.fillOval(x, y, playerSize, playerSize);
@@ -99,6 +102,7 @@ public class Player {
 	}
 
 	public void showSolutionPath() {
+		cheat = true;
 		showSolution = !showSolution;
 	}
 
@@ -106,7 +110,11 @@ public class Player {
 		if(currentCell == Maze.cells[Maze.cells.length-1][Maze.cells[0].length-1] && !goalIsFound) {
 			goalIsFound = true;
 			JDialog dialog = new JDialog();
-			JOptionPane.showMessageDialog(dialog, "Winner winner chicken dinner!\nMaze completed in: " + game.getSeconds() + " s");
+			
+			if(cheat)
+				JOptionPane.showMessageDialog(dialog, "No Winner for you, cheating cheater\nMaze completed in: " + game.getSeconds() + " s");
+			else
+				JOptionPane.showMessageDialog(dialog, "Winner winner chicken dinner!\nMaze completed in: " + game.getSeconds() + " s");
 			game.resetGame();
 		}	
 	}
