@@ -1,4 +1,10 @@
 package entities;
+/**
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-06
+ * This is the Player class, it paints out the player icon and 
+ * keeps track of movement and if it has reached the goal.
+ */
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -28,7 +34,6 @@ public class Player {
 		this.y = Maze.cells[0][0].getyPixels() + Cell.WALLSIZE;
 
 		currentCell = Maze.cells[0][0];
-
 	}
 
 	public void update() {
@@ -37,10 +42,9 @@ public class Player {
 
 	public void render(Graphics g) {
 
-		
 		if(showSolution) {
 			g.setColor(Color.MAGENTA);
-			for(int x = 0; x < Maze.cells.length; x++)
+			for(int x = 0; x < Maze.cells.length; x++) {
 				for(int y = 0; y < Maze.cells[x].length; y++) {
 					try {
 						if(Maze.cells[x][y].isSolution()) 
@@ -49,11 +53,9 @@ public class Player {
 					}catch(NullPointerException e) {
 
 					}
-
 				}
+			}
 		}
-		
-
 		g.setColor(Color.darkGray);
 		g.fillOval(x, y, playerSize, playerSize);
 
@@ -65,7 +67,6 @@ public class Player {
 			x -= speed;
 			currentCell = Maze.cells[currentCell.getX()-1][currentCell.getY()];
 		}
-
 	}
 
 	public void moveDown() {
@@ -75,7 +76,6 @@ public class Player {
 			currentCell = Maze.cells[currentCell.getX()][currentCell.getY()+1];
 			checkIfGoalIsReached();
 		}
-
 	}
 
 	public void moveUp() {
@@ -84,7 +84,6 @@ public class Player {
 			y -= speed;
 			currentCell = Maze.cells[currentCell.getX()][currentCell.getY()-1];
 		}
-
 	}
 
 	public void moveRight() {
@@ -94,7 +93,6 @@ public class Player {
 			currentCell = Maze.cells[currentCell.getX()+1][currentCell.getY()];
 			checkIfGoalIsReached();
 		}
-
 	}
 
 	public int getPlayerSize() {
@@ -122,5 +120,4 @@ public class Player {
 	public void resetGame() {
 		game.resetGame();
 	}
-
 }

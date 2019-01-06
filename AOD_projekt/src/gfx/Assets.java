@@ -1,5 +1,9 @@
 package gfx;
-
+/**
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-06
+ * I don't know what this is. Or what it does.
+ */
 import java.awt.image.BufferedImage;
 
 public class Assets {

@@ -1,4 +1,9 @@
 package gfx;
+/**
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-06
+ * Maybe trying to get a picture in somewhere?
+ */
 
 import java.awt.image.BufferedImage;
 

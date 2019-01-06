@@ -1,5 +1,10 @@
 package game;
-
+/**
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-06
+ *This class holds the entire game, this is where it starts and 
+ *it keeps track on the counter for the game. 
+ */
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import entities.Player;
@@ -116,8 +121,7 @@ public class Game implements Runnable {
 			}
 
 			if(timer >= 1000000000) {
-				
-				
+			
 				seconds++;
 
 				updates = 0;

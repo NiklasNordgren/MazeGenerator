@@ -1,4 +1,10 @@
 package input;
+/**
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-06
+ * This is maybe for if you want to control with your mouse? 
+ * or is it standard pressing of buttons? I don't think so.
+ */
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

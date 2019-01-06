@@ -1,5 +1,9 @@
 package gfx;
-
+/**
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-06
+ * Don't know what this is either.
+ */
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 

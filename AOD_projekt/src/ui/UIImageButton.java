@@ -1,5 +1,9 @@
 package ui;
-
+/**
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-06
+ * Is this for if we dont want GUI? 
+ */
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 

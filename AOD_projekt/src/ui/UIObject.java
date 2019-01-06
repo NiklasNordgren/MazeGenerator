@@ -1,5 +1,9 @@
 package ui;
-
+/**
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-06
+ * WHAT ARE DIS FOR?
+ */
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;

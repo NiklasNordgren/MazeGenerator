@@ -1,5 +1,9 @@
 package states;
-
+/**
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-06
+ * Not sure what this does. Is this just for the left part of the screen?
+ */
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -30,8 +34,6 @@ public class MenuState extends State {
 				State.setState(game.getGameState());
 			}
 		}));
-
-
 	}
 
 	@Override
@@ -45,5 +47,4 @@ public class MenuState extends State {
 		for(UIObject o : uiObjects)
 			o.render(g);
 	}
-
 }

@@ -1,4 +1,9 @@
 package game;
+/**
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-06
+ * Here we create all the graphics to our game.
+ */
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -86,7 +91,6 @@ public class Display {
 
 		c.anchor = GridBagConstraints.CENTER;
 
-
 		c.gridx = 0;
 		c.gridy = 0;
 		secondsLabel = new JLabel("Time: 0.0");
@@ -160,7 +164,6 @@ public class Display {
 		c.gridy++;
 		panel.add(buttonCreateMap, c);
 
-
 		canvas = new Canvas();
 		canvas.setPreferredSize(dimension);
 		canvas.setMinimumSize(dimension);
@@ -180,7 +183,6 @@ public class Display {
 
 		frame.pack();
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
 	}
 
 	public JFrame getFrame() {
