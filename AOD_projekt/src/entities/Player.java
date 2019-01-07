@@ -111,9 +111,9 @@ public class Player {
 			JDialog dialog = new JDialog();
 			
 			if(cheat)
-				JOptionPane.showMessageDialog(dialog, "No dinner for you, cheating cheater\n \nMaze completed in: " + game.getSeconds() + " s");
+				JOptionPane.showMessageDialog(dialog, "You've reached the goal but you've achieved this through cheating. \nMaze completed in: " + game.getSeconds() + " s");
 			else
-				JOptionPane.showMessageDialog(dialog, "Winner winner chicken dinner!\n \nMaze completed in: " + game.getSeconds() + " s");
+				JOptionPane.showMessageDialog(dialog, "Congratulations! You've done it! \nMaze completed in: " + game.getSeconds() + " s");
 			game.resetGame();
 		}	
 	}
