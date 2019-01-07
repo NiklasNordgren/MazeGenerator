@@ -9,14 +9,14 @@ import game.Display;
  * the maze in the game.
  * 
  * Each Cell object has an Integer array containing four integers representing the four walls surrounding the cell object.
- * If the integer at a position has the value of 1, the wall exists, and if the integer has a value of 0 the wall doesn´t exist.
+ * If the integer at a position has the value of 1, the wall exists, otherwise the wall doesn´t exist.
  * 
  * The integer at position [0] in the array represents the north wall.
  * The integer at position [1] in the array represents the south wall.
  * The integer at position [2] in the array represents the west wall. 
  * The integer at position [3] in the array represents the east wall.
  * 
- * @author Hanna Meden, Niklas Nordgren
+ * @author Hanna Medén, Niklas Nordgren
  * @version 2019-01-06
  */
 public class Cell {
@@ -24,7 +24,7 @@ public class Cell {
 	public static final int CELLSIZE = 30;
 	public static final int WALLSIZE = 5;
 
-	public int[] walls = {1, 1, 1, 1}; //N, S, W, E    1 = wall, 0 = no wall
+	public int[] walls = {1, 1, 1, 1}; //N, S, W, E    1 = wall
 
 	private int x, y;
 	private int xPixels, yPixels;

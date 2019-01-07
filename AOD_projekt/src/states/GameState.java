@@ -9,7 +9,7 @@ import game.Game;
 /**
  * The {@code GameState} class. Instansiates objects of the classes that belongs to the game state {@code State}.
  * 
- * @author Hanna Meden, Niklas Nordgren
+ * @author Hanna Medén, Niklas Nordgren
  * @version 2019-01-06
  */
 public class GameState extends State {

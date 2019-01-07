@@ -10,7 +10,7 @@ import entities.Player;
  * This class is used by the maze game to convert input from the user to logical game actions. Such as player
  * movement etc.
  * 
- * @author Hanna Meden, Niklas Nordgren
+ * @author Hanna Medén, Niklas Nordgren
  * @version 2019-01-06
  */
 public class KeyManager implements KeyListener {

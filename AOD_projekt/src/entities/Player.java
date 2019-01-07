@@ -11,11 +11,11 @@ import environment.Maze;
 import game.Game;
 
 /**
- * The {@code Player} class. Paints the player represented as a filled black circle to the screen.
+ * The {@code Player} class. Paints the player represented as a filled dark gray circle to the screen.
  * Contains methods to move the player on the screen, check if the goalcell is reached, show the path
- * that leads to the goalcell and reset the game.
+ * that leads to the goal cell and reset the game.
  * 
- * @author Hanna Meden, Niklas Nordgren
+ * @author Hanna Medén, Niklas Nordgren
  * @version 2019-01-06
  */
 public class Player {
@@ -38,7 +38,7 @@ public class Player {
 	 * 
 	 * Initializes the top left x and y coordinates where the player is to be displayed onto the screen.
 	 * 
-	 * Initializes this instance currentCell object variable to the first {@code Cell} 
+	 * Initializes the currentCell object variable to the first {@code Cell} 
 	 * in the two-dimensional {@code Cell} array provided by the {@code Maze} class.
 	 * 
 	 * @param game the {@code Game} object
@@ -54,15 +54,15 @@ public class Player {
 
 	/**
 	 * This method is currently not being used. May be used to update variables of the {@code Player} class.
-	 * This Method gets called upon 60 times per second by the Game class implicitly.
+	 * This Method gets called upon 60 times per second by the Game class implicitly through the {@code GameState} class.
 	 */
 	public void update() {
 
 	}
 
 	/**
-	 * Is responsible for rendering graphics related to the {@code Player} class implicitly to the {@code Canvas} object
-	 * provided by the {@code Display} class.
+	 * Responsible for rendering graphics related to the {@code Player} class implicitly to the {@code Canvas} object
+	 * provided by the {@code Display} class through the {@code GameState} class.
 	 * 
 	 * @param g the Graphics object
 	 */
@@ -154,7 +154,7 @@ public class Player {
 	/**
 	 * Checks if the goal is reached.
 	 * 
-	 * If the player represented by a darkgray circle has reached the last Cell in the two-dimensional Cell array provided by the {@code Maze} class,
+	 * If the player represented by a dark gray circle has reached the last Cell in the two dimensional Cell array provided by the {@code Maze} class,
 	 * a {@code JDialog} is displayed, containing information to the user.
 	 * 
 	 */
@@ -172,7 +172,7 @@ public class Player {
 	}
 
 	/**
-	 * Resets the game.
+	 * Resets the game implicitly by calling the resetGame method provided by the {@code Game} class by using the game object.
 	 */
 	public void resetGame() {
 		game.resetGame();

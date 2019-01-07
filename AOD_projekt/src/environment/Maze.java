@@ -11,7 +11,7 @@ import java.util.Stack;
  * The {@code Maze} class. Creates the maze, finds the path through the maze, and is also able to draw the path onto the screen.
  * The algorithm used to create the maze is called recursive backtracking.
  * 
- * @author Hanna Meden, Niklas Nordgren
+ * @author Hanna Medén, Niklas Nordgren
  * @version 2019-01-06
  */
 public class Maze {

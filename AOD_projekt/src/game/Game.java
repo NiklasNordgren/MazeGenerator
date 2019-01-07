@@ -13,7 +13,7 @@ import states.State;
  * 
  * Implements the Runnable Interface, which enables the instances of the class to be executed by a thread.
  * 
- * @author Hanna Meden, Niklas Nordgren
+ * @author Hanna Medén, Niklas Nordgren
  * @version 2019-01-06
  */
 public class Game implements Runnable {

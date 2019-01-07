@@ -22,7 +22,7 @@ import javax.swing.JRadioButton;
  * 
  * The {@code Display} class. Creates the GUI of the maze game.
  * 
- * @author Hanna Meden, Niklas Nordgren
+ * @author Hanna Medén, Niklas Nordgren
  * @version 2019-01-06
  */
 public class Display {
