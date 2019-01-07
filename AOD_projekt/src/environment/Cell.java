@@ -136,7 +136,7 @@ public class Cell {
 	}
 
 	/**
-	 * Gets the y.
+	 * Gets the y position of the Cell object in the two dimensional Cell array provided by the {@code Maze} class.
 	 *
 	 * @return the y
 	 */
@@ -145,7 +145,7 @@ public class Cell {
 	}
 
 	/**
-	 * Gets the x pixels.
+	 * Gets the x pixel position of the upper left corner of the Cell object.
 	 *
 	 * @return the x pixels
 	 */
@@ -154,7 +154,7 @@ public class Cell {
 	}
 
 	/**
-	 * Gets the y pixels.
+	 * Gets the y pixel position of the upper left corner of the Cell object.
 	 *
 	 * @return the y pixels
 	 */

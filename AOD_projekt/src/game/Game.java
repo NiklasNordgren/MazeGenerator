@@ -1,10 +1,5 @@
 package game;
-/**
- * @author Hanna Med�n, Niklas Nordgren
- * @version 2019-01-06
- *This class holds the entire game, this is where it starts and 
- *it keeps track on the counter for the game. 
- */
+
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import entities.Player;
@@ -12,6 +7,15 @@ import input.KeyManager;
 import states.GameState;
 import states.State;
 
+/**
+ * 
+ * The {@code Game} class. Instansiates objects of all the classes that are components of the maze game.
+ * 
+ * Implements the Runnable Interface, which enables the instances of the class to be executed by a thread.
+ * 
+ * @author Hanna Meden, Niklas Nordgren
+ * @version 2019-01-06
+ */
 public class Game implements Runnable {
 
 	private Thread thread;
@@ -30,6 +34,12 @@ public class Game implements Runnable {
 
 	private int mazeSize = 27;
 
+	/**
+	 * Instantiates a new {@code Game} object.
+	 * 
+	 * Initializes objects used by the {@code Game} object to create the maze game.
+	 * 
+	 */
 	public Game() {
 		
 		display = new Display(this);
@@ -38,6 +48,11 @@ public class Game implements Runnable {
 
 	}
 
+	/**
+	 * Initializes the objects used by the {@code Game} object.
+	 *
+	 * @param mazeSize the width and height of the maze in number of cells
+	 */
 	private void init(int mazeSize) {
 
 		gameState = new GameState(this, mazeSize);
@@ -48,6 +63,13 @@ public class Game implements Runnable {
 		display.getCanvas().addKeyListener(keyManager);
 	}
 
+	/**
+	 * This method is currently not being used. May be used to update variables of the {@code Game} class.
+	 * This Method gets called upon 60 times per second.
+	 * 
+	 * Checks if the current state is not equal to null.
+	 * If not, get the current state and update it.
+	 */
 	private void update() {
 
 		if(State.getState() != null)
@@ -55,6 +77,16 @@ public class Game implements Runnable {
 
 	}
 
+	/**
+	 * Responsible for rendering all graphics of the maze game.
+	 * Initializes the {@code BufferStrategy} object bs to the {@code BufferStrategy} provided by the {@code Display} Class.
+	 * If a {@code BufferStrategy} does not currently exists, create a {@code BufferStrategy} containing 3 buffers.
+	 * 
+	 * If the current state does not equal null, get the current state and call its render method by passing the {@code Graphics} object g.
+	 * 
+	 * 
+	 * @param g the Graphics object
+	 */
 	private void render() {
 		bs = display.getCanvas().getBufferStrategy();
 		if(bs == null) {
@@ -74,6 +106,9 @@ public class Game implements Runnable {
 		g.dispose();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
 	public void run() {
 
@@ -117,6 +152,11 @@ public class Game implements Runnable {
 		stop();
 	}
 
+	/**
+	 * Starts the game loop by setting the running boolean to true and initializing the {@code Thread} object thread 
+	 * aswell as starting its execution. 
+	 * Returns if running boolean value is true.
+	 */
 	public synchronized void start() {
 		if(running)
 			return;
@@ -125,6 +165,10 @@ public class Game implements Runnable {
 		thread.start();
 	}
 
+	/**
+	 * Stops the game loop by setting the running boolean to false and calling the {@code Thread} object thread's join method.
+	 * Returns if the running boolean is false.
+	 */
 	public synchronized void stop() {
 		if(!running)
 			return;
@@ -136,6 +180,9 @@ public class Game implements Runnable {
 		}
 	}
 	
+	/**
+	 * Resets the game by calling the init method and resetting the seconds variable to 0.
+	 */
 	public void resetGame() {
 		display.getFrame().removeKeyListener(keyManager);
 		display.getCanvas().removeKeyListener(keyManager);
@@ -144,18 +191,38 @@ public class Game implements Runnable {
 		seconds = 0;
 	}
 	
+	/**
+	 * Gets the seconds.
+	 *
+	 * @return the seconds
+	 */
 	public int getSeconds() {
 		return seconds;
 	}
 
+	/**
+	 * Gets the {@code GameState} object gameState.
+	 *
+	 * @return the game state
+	 */
 	public GameState getGameState() {
 		return gameState;
 	}
 	
+	/**
+	 * Gets the {@code Player} object player.
+	 *
+	 * @return the player
+	 */
 	public Player getPlayer() {
 		return gameState.getPlayer();
 	}
 
+	/**
+	 * Sets the maze width and height to the Integer parameter {@code mazeSize}.
+	 *
+	 * @param mazeSize the new maze size
+	 */
 	public void setMazeSize(int mazeSize) {
 		this.mazeSize = mazeSize;
 	}

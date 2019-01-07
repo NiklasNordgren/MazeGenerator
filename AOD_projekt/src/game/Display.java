@@ -1,9 +1,4 @@
 package game;
-/**
- * @author Hanna Med�n, Niklas Nordgren
- * @version 2019-01-06
- * Here we create all the graphics to our game.
- */
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -23,6 +18,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+/**
+ * 
+ * The {@code Display} class. Creates the GUI of the maze game.
+ * 
+ * @author Hanna Meden, Niklas Nordgren
+ * @version 2019-01-06
+ */
 public class Display {
 
 	private JFrame frame;
@@ -39,6 +41,15 @@ public class Display {
 
 	public static int width = 1200, height = 900;
 
+	/**
+	 * Instantiates a new {@code Display} object.
+	 * 
+	 * Sets this instance game object variable to the incoming {@code game} object.
+	 * 
+	 * Initializes all objects used by the {@code Display} object to create a GUI.
+	 *
+	 * @param game the {@code Game} object
+	 */
 	public Display(Game game) {
 
 		Dimension dimension = new Dimension(width, height);
@@ -185,21 +196,47 @@ public class Display {
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 	}
 
+	/**
+	 * Gets the {@code JFrame} object used by the {@code Display} class.
+	 *
+	 * @return the {@code JFrame} object used by the {@code Display} class
+	 */
 	public JFrame getFrame() {
 		return frame;
 	}
 
+	/**
+	 * Gets the {@code Canvas} object used by the {@code Display} class.
+	 *
+	 * @return the {@code Canvas} object used by the {@code Display} class
+	 */
 	public Canvas getCanvas() {
 		return canvas;
 	}
 
+	/**
+	 * Gets the width of {@code JFrame} object used by the {@code Display} class.
+	 *
+	 * @return width
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * Gets the height of {@code JFrame} object used by the {@code Display} class.
+	 *
+	 * @return height
+	 */
 	public int getHeight() {
 		return height;
 	}
+	
+	/**
+	 * Sets the text of the {@code JLabel} object used to display the time.
+	 *
+	 * @param text the new time
+	 */
 	public void setTime(String text) {
 		secondsLabel.setText(text);
 	}

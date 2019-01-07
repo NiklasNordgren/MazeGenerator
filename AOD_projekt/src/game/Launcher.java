@@ -1,10 +1,10 @@
 package game;
 /**
- * @author Hanna Medén, Niklas Nordgren
- * @version 2019-01-06
- * This class is used only as a launcher for the program. 
+ * This class is used only to launch the program.
  * This starts the game.
  *
+ * @author Hanna Meden, Niklas Nordgren
+ * @version 2019-01-06
  */
 public class Launcher {
 	
