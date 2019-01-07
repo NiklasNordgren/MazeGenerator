@@ -1,4 +1,9 @@
 package game;
+/**
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-06
+ * Here we create all the graphics to our game.
+ */
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -22,15 +27,14 @@ public class Display {
 
 	private JFrame frame;
 	private Canvas canvas;
-
 	private JLabel secondsLabel;
 
 	private JButton buttonCreateMap, buttonReset, buttonShowPath;
+
 	private JPanel panel;
 	
 	private Dimension dimensionButton;
 	
-
 	private JRadioButton radioButton1, radioButton2, radioButton3;
 
 	public static int width = 1200, height = 900;
@@ -84,6 +88,7 @@ public class Display {
 		panel.setFocusable(false);
 
 		c.insets = new Insets(10, 10, 10, 10);
+
 		c.anchor = GridBagConstraints.CENTER;
 
 		c.gridx = 0;
@@ -92,9 +97,6 @@ public class Display {
 		secondsLabel.setFont(new Font("Arial",Font.BOLD, 55));
 		
 		panel.add(secondsLabel, c);
-		c.gridy++;
-	
-
 		c.gridy++;
 
 		panel.add(buttonReset, c);
@@ -155,15 +157,12 @@ public class Display {
 				else if(actionCommand.equals("7 x 7")) {
 					game.setMazeSize(7);
 					game.resetGame();
-					
 				}
-					
 			}
 		});
 
 		c.gridy++;
 		panel.add(buttonCreateMap, c);
-
 
 		canvas = new Canvas();
 		canvas.setPreferredSize(dimension);
@@ -184,7 +183,6 @@ public class Display {
 
 		frame.pack();
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
 	}
 
 	public JFrame getFrame() {

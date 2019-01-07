@@ -1,4 +1,9 @@
 package input;
+/**
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-06
+ * This class sets the hotkeys and what should happen if they are pressed.
+ */
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -38,5 +43,4 @@ public class KeyManager implements KeyListener {
 	public void keyTyped(KeyEvent e) {
 	
 	}
-
 }

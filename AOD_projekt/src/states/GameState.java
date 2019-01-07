@@ -1,5 +1,9 @@
 package states;
-
+/**
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-06
+ * Starts the game, player and starts it all.
+ */
 import java.awt.Graphics;
 
 import entities.Player;

@@ -1,5 +1,10 @@
 package game;
-
+/**
+ * @author Hanna Med�n, Niklas Nordgren
+ * @version 2019-01-06
+ *This class holds the entire game, this is where it starts and 
+ *it keeps track on the counter for the game. 
+ */
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import entities.Player;
@@ -29,16 +34,14 @@ public class Game implements Runnable {
 		
 		display = new Display(this);
 		
-		init(27);
+		init(mazeSize);
 
 	}
 
 	private void init(int mazeSize) {
 
 		gameState = new GameState(this, mazeSize);
-		
 		keyManager = new KeyManager(gameState.getPlayer());
-
 		State.setState(gameState);
 
 		display.getFrame().addKeyListener(keyManager);
@@ -105,7 +108,7 @@ public class Game implements Runnable {
 			}
 
 			if(timer >= 1000000000) {
-				
+
 				seconds++;
 
 				timer = 0;
@@ -156,5 +159,4 @@ public class Game implements Runnable {
 	public void setMazeSize(int mazeSize) {
 		this.mazeSize = mazeSize;
 	}
-
 }

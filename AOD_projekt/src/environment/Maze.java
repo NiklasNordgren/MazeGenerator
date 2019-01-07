@@ -1,5 +1,11 @@
 package environment;
 
+/**
+ * @author Hanna Med�n, Niklas Nordgren
+ * @version 2019-01-06
+ * In this class we create the maze, find the way out and draw it out.
+ */
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -123,7 +129,6 @@ public class Maze {
 			cc.walls[3] = 0;
 			nc.walls[2] = 0;
 		}
-
 	}
 
 	private ArrayList<Cell> findNeighbours(Cell currentCell) {
@@ -153,9 +158,7 @@ public class Maze {
 			if(!east.getIsVisited())
 				neighbours.add(east);
 		}
-
 		return neighbours;
-
 	}
 
 	private Cell selectRandomNeighbour(ArrayList<Cell> neighbours) {
@@ -173,7 +176,6 @@ public class Maze {
 	public void render(Graphics g) {
 
 		try {
-
 			//Draw walls
 			for(int x = 0; x < cells.length; x++)
 				for(int y = 0; y < cells[x].length; y++) {
@@ -182,12 +184,11 @@ public class Maze {
 						cells[x][y].drawWalls(g);
 					}catch(NullPointerException e) {
 
-
 					}
-
 				}
+		}
 
-		}catch(ArrayIndexOutOfBoundsException e) {
+		catch(ArrayIndexOutOfBoundsException e) {
 
 		}
 

@@ -1,4 +1,10 @@
 package environment;
+/**
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-06
+ * The maze is built of Cells, this decides the size and whereabouts 
+ * of the cells and the walls.
+ */
 import java.awt.Graphics;
 
 import game.Display;
@@ -14,8 +20,6 @@ public class Cell {
 	private int xPixels, yPixels;
 	private boolean isVisited;
 	private boolean isSolution;
-
-	
 
 	public Cell(int x, int y) {
 		this.x = x;
@@ -49,8 +53,6 @@ public class Cell {
 			//g.drawLine(xPixels + CELLSIZE , yPixels, xPixels + CELLSIZE , yPixels + CELLSIZE);
 			g.fillRect(xPixels + CELLSIZE, yPixels, WALLSIZE, CELLSIZE+WALLSIZE);
 		}
-
-
 	}
 
 	public void fillCell(Graphics g) {
