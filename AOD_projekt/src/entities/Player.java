@@ -1,10 +1,5 @@
 package entities;
-/**
- * @author Hanna Med�n, Niklas Nordgren
- * @version 2019-01-06
- * This is the Player class, it paints out the player icon and 
- * keeps track of movement and if it has reached the goal.
- */
+
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -15,19 +10,39 @@ import environment.Cell;
 import environment.Maze;
 import game.Game;
 
+/**
+ * The {@code Player} class. Paints the player represented as a filled black circle to the screen.
+ * Contains methods to move the player on the screen, check if the goalcell is reached, show the path
+ * that leads to the goalcell and reset the game.
+ * 
+ * @author Hanna Meden, Niklas Nordgren
+ * @version 2019-01-06
+ */
 public class Player {
 
 	private Game game;
+	
+	private Cell currentCell;
+
 	private int playerSize = Cell.CELLSIZE - Cell.WALLSIZE - 1;
 	private int x, y;
 	private int speed = Cell.CELLSIZE;
+
 	private boolean cheat = false;
-
-	private Cell currentCell;
-
-	private boolean goalIsFound;
 	private boolean showSolution;
 
+	/**
+	 * Instantiates a new player object.
+	 * 
+	 * Sets this instance game object variable to the incoming {@code game} object.
+	 * 
+	 * Initializes the top left x and y coordinates where the player is to be displayed onto the screen.
+	 * 
+	 * Initializes this instance currentCell object variable to the first {@code Cell} 
+	 * in the two-dimensional {@code Cell} array provided by the {@code Maze} class.
+	 * 
+	 * @param game the {@code Game} object
+	 */
 	public Player(Game game) {
 		this.game = game;
 		this.x = Maze.cells[0][0].getxPixels() + Cell.WALLSIZE;
@@ -36,10 +51,20 @@ public class Player {
 		currentCell = Maze.cells[0][0];
 	}
 
+	/**
+	 * This method is currently not being used. May be used to update variables of the {@code Player} class.
+	 * This Method gets called upon 60 times per second by the Game class implicitly.
+	 */
 	public void update() {
 
 	}
 
+	/**
+	 * Is responsible for rendering graphics related to the {@code Player} class implicitly to the {@code Canvas} object
+	 * provided by the {@code Display} class.
+	 * 
+	 * @param g the Graphics object
+	 */
 	public void render(Graphics g) {
 
 		if(showSolution) {
@@ -61,6 +86,9 @@ public class Player {
 
 	}
 
+	/**
+	 * Moves the player one cell to the left.
+	 */
 	public void moveLeft() {
 
 		if(x > 0 && currentCell.walls[2] != 1) {
@@ -69,6 +97,9 @@ public class Player {
 		}
 	}
 
+	/**
+	 * Moves the player one cell down.
+	 */
 	public void moveDown() {
 
 		if(currentCell.walls[1] != 1) {
@@ -78,6 +109,9 @@ public class Player {
 		}
 	}
 
+	/**
+	 * * Moves the player one cell up.
+	 */
 	public void moveUp() {
 
 		if(y > 0 && currentCell.walls[0] != 1) {
@@ -85,7 +119,9 @@ public class Player {
 			currentCell = Maze.cells[currentCell.getX()][currentCell.getY()-1];
 		}
 	}
-
+	/**
+	 * Moves the player one cell to the right.
+	 */
 	public void moveRight() {
 
 		if(currentCell.walls[3] != 1) {
@@ -95,18 +131,35 @@ public class Player {
 		}
 	}
 
+	/**
+	 * Gets the player size.
+	 *
+	 * @return the player size
+	 */
 	public int getPlayerSize() {
 		return playerSize;
 	}
 
+	/**
+	 * Sets the cheat {@code boolean} variable to true.
+	 * Toggles the showSolution {@code boolean} variable.
+	 */
 	public void showSolutionPath() {
 		cheat = true;
 		showSolution = !showSolution;
 	}
 
+	/**
+	 * Checks if the goal is reached.
+	 * 
+	 * If the player represented by a darkgray circle has reached the last Cell in the two-dimensional Cell array provided by the {@code Maze} class,
+	 * a {@code JDialog} is displayed, containing information to the user.
+	 * 
+	 */
 	public void checkIfGoalIsReached() {
-		if(currentCell == Maze.cells[Maze.cells.length-1][Maze.cells[0].length-1] && !goalIsFound) {
-			goalIsFound = true;
+
+		if(currentCell == Maze.cells[Maze.cells.length-1][Maze.cells[0].length-1]) {
+
 			game.dialogOpen = true;
 			JDialog dialog = new JDialog();
 			
@@ -118,6 +171,9 @@ public class Player {
 		}	
 	}
 
+	/**
+	 * Resets the game.
+	 */
 	public void resetGame() {
 		game.resetGame();
 	}

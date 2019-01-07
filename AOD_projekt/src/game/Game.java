@@ -1,6 +1,5 @@
 package game;
 /**
- * @author Hanna Medén, Niklas Nordgren
  * @version 2019-01-06
  *This class holds the entire game, this is where it starts and 
  *it keeps track on the counter for the game. 
@@ -9,7 +8,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import entities.Player;
 import input.KeyManager;
-import input.MouseManager;
 import states.GameState;
 import states.State;
 
@@ -22,7 +20,6 @@ public class Game implements Runnable {
 	private Display display;
 
 	private KeyManager keyManager;
-	private MouseManager mouseManager;
 
 	private BufferStrategy bs;
 	private Graphics g;
@@ -158,10 +155,6 @@ public class Game implements Runnable {
 
 	public Player getPlayer() {
 		return gameState.getPlayer();
-	}
-
-	public MouseManager getMouseManager() {
-		return mouseManager;
 	}
 
 	public void setMazeSize(int mazeSize) {

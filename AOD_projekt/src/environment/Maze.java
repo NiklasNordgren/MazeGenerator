@@ -1,23 +1,22 @@
 package environment;
-/**
- * @author Hanna Medén, Niklas Nordgren
- * @version 2019-01-06
- * In this class we create the maze, find the way out and draw it out.
- */
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
-import game.Game;
-
+/**
+ * @author Hanna Meden, Niklas Nordgren
+ * @version 2019-01-06
+ * 
+ * In this class we create the maze, find the way out and draw it out.
+ */
 public class Maze {
 
 	public static Cell[][] cells;
 
 	private Cell nextCell;
-
 	private Cell goalCell;
 	private Cell startCell;
 
@@ -202,5 +201,5 @@ public class Maze {
 		goalCell.fillCell(g);
 
 	}
-}
 
+}

@@ -1,6 +1,5 @@
 package game;
 /**
- * @author Hanna Meden, Niklas Nordgren
  * @version 2019-01-06
  * Here we create all the graphics to our game.
  */
