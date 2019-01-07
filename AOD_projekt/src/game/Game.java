@@ -3,11 +3,8 @@ package game;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import entities.Player;
-import gfx.Assets;
 import input.KeyManager;
-import input.MouseManager;
 import states.GameState;
-import states.MenuState;
 import states.State;
 
 public class Game implements Runnable {
@@ -18,15 +15,13 @@ public class Game implements Runnable {
 	private Display display;
 
 	private KeyManager keyManager;
-	private MouseManager mouseManager;
 
 	private BufferStrategy bs;
 	private Graphics g;
 
 	private GameState gameState;
-	private MenuState menuState;
 	
-	private int seconds, tenSecs, hundredSecs;
+	private int seconds, tenSecs;
 
 	private int mazeSize = 27;
 
@@ -39,20 +34,13 @@ public class Game implements Runnable {
 	}
 
 	private void init(int mazeSize) {
-		
-		menuState = new MenuState(this);
+
 		gameState = new GameState(this, mazeSize);
 		
 		keyManager = new KeyManager(gameState.getPlayer());
 
-		//mouseManager = new MouseManager();		
-
 		State.setState(gameState);
-		//State.setState(menuState);
-		
-		//display.getCanvas().addMouseMotionListener(mouseManager);
-		//display.getCanvas().addMouseListener(mouseManager);
-		
+
 		display.getFrame().addKeyListener(keyManager);
 		display.getCanvas().addKeyListener(keyManager);
 	}
@@ -92,8 +80,7 @@ public class Game implements Runnable {
 		long now;
 		long lastTime = System.nanoTime();
 		long timer = 0;
-		int updates = 0;
-
+	
 		seconds = 0;
 
 		while(running) {
@@ -114,16 +101,13 @@ public class Game implements Runnable {
 				update();
 				render();
 
-				updates++;
 				delta--;
 			}
 
 			if(timer >= 1000000000) {
 				
-				
 				seconds++;
 
-				updates = 0;
 				timer = 0;
 			}
 		}
@@ -167,10 +151,6 @@ public class Game implements Runnable {
 	
 	public Player getPlayer() {
 		return gameState.getPlayer();
-	}
-	
-	public MouseManager getMouseManager() {
-		return mouseManager;
 	}
 
 	public void setMazeSize(int mazeSize) {
