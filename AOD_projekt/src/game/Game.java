@@ -8,11 +8,9 @@ package game;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import entities.Player;
-import gfx.Assets;
 import input.KeyManager;
 import input.MouseManager;
 import states.GameState;
-import states.MenuState;
 import states.State;
 
 public class Game implements Runnable {
@@ -29,7 +27,6 @@ public class Game implements Runnable {
 	private Graphics g;
 
 	private GameState gameState;
-	private MenuState menuState;
 	
 	private int seconds, tenSecs;
 
@@ -39,13 +36,12 @@ public class Game implements Runnable {
 		
 		display = new Display(this);
 		
-		init(27);
+		init(mazeSize);
 
 	}
 
 	private void init(int mazeSize) {
 		
-		menuState = new MenuState(this);
 		gameState = new GameState(this, mazeSize);
 		
 		keyManager = new KeyManager(gameState.getPlayer());
@@ -177,5 +173,4 @@ public class Game implements Runnable {
 	public void setMazeSize(int mazeSize) {
 		this.mazeSize = mazeSize;
 	}
-
 }
