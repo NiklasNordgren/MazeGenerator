@@ -1,6 +1,6 @@
 package entities;
 /**
- * @author Hanna Medén, Niklas Nordgren
+ * @author Hanna Medï¿½n, Niklas Nordgren
  * @version 2019-01-06
  * This is the Player class, it paints out the player icon and 
  * keeps track of movement and if it has reached the goal.
@@ -107,12 +107,13 @@ public class Player {
 	public void checkIfGoalIsReached() {
 		if(currentCell == Maze.cells[Maze.cells.length-1][Maze.cells[0].length-1] && !goalIsFound) {
 			goalIsFound = true;
+			game.dialogOpen = true;
 			JDialog dialog = new JDialog();
 			
 			if(cheat)
-				JOptionPane.showMessageDialog(dialog, "No Winner for you, cheating cheater\nMaze completed in: " + game.getSeconds() + " s");
+				JOptionPane.showMessageDialog(dialog, "No dinner for you, cheating cheater\n \nMaze completed in: " + game.getSeconds() + " s");
 			else
-				JOptionPane.showMessageDialog(dialog, "Winner winner chicken dinner!\nMaze completed in: " + game.getSeconds() + " s");
+				JOptionPane.showMessageDialog(dialog, "Winner winner chicken dinner!\n \nMaze completed in: " + game.getSeconds() + " s");
 			game.resetGame();
 		}	
 	}

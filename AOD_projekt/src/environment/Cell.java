@@ -1,6 +1,6 @@
 package environment;
 /**
- * @author Hanna Medén, Niklas Nordgren
+ * @author Hanna Meden, Niklas Nordgren
  * @version 2019-01-06
  * The maze is built of Cells, this decides the size and whereabouts 
  * of the cells and the walls.

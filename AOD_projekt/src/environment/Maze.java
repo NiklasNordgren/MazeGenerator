@@ -16,7 +16,6 @@ public class Maze {
 
 	public static Cell[][] cells;
 
-	private Cell currentCell;
 	private Cell nextCell;
 
 	private Cell goalCell;
@@ -74,7 +73,6 @@ public class Maze {
 		if(currentCell.equals(goalCell) && !goalIsFound)
 			goalIsFound = true;
 
-		this.currentCell = currentCell;
 		currentCell.setVisited(true);
 		neighbours = findNeighbours(currentCell);
 

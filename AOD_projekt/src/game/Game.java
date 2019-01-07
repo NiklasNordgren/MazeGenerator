@@ -1,6 +1,6 @@
 package game;
 /**
- * @author Hanna Medén, Niklas Nordgren
+ * @author Hanna MedÃ©n, Niklas Nordgren
  * @version 2019-01-06
  *This class holds the entire game, this is where it starts and 
  *it keeps track on the counter for the game. 
@@ -17,6 +17,7 @@ public class Game implements Runnable {
 
 	private Thread thread;
 	private boolean running;
+	public boolean dialogOpen;
 
 	private Display display;
 
@@ -27,30 +28,26 @@ public class Game implements Runnable {
 	private Graphics g;
 
 	private GameState gameState;
-	
+
 	private int seconds, tenSecs;
 
-	private int mazeSize = 27;
+	private int mazeSize = 7;
 
 	public Game() {
-		
+
 		display = new Display(this);
-		
+
 		init(mazeSize);
 
 	}
 
 	private void init(int mazeSize) {
-		
+
 		gameState = new GameState(this, mazeSize);
-		
+
 		keyManager = new KeyManager(gameState.getPlayer());
 		State.setState(gameState);
-		//State.setState(menuState);
-		
-		//display.getCanvas().addMouseMotionListener(mouseManager);
-		//display.getCanvas().addMouseListener(mouseManager);
-		
+
 		display.getFrame().addKeyListener(keyManager);
 		display.getCanvas().addKeyListener(keyManager);
 	}
@@ -59,7 +56,6 @@ public class Game implements Runnable {
 
 		if(State.getState() != null)
 			State.getState().update();
-
 	}
 
 	private void render() {
@@ -90,7 +86,6 @@ public class Game implements Runnable {
 		long now;
 		long lastTime = System.nanoTime();
 		long timer = 0;
-		int updates = 0;
 
 		seconds = 0;
 
@@ -102,25 +97,22 @@ public class Game implements Runnable {
 			lastTime = now;
 			tenSecs = (int) (timer / 100000000);
 			int minutes = seconds/60;
-			
-			if(minutes > 0) {
-				display.setTime("Time: " + minutes + " m " + seconds % 60 + "." + tenSecs + " s");
-			}else
-				display.setTime("Time: "+ seconds + "."+ tenSecs  + " s");
 
+			if(!dialogOpen) {
+				if(minutes > 0)
+					display.setTime("Time: " + minutes + " m " + seconds % 60 + "." + tenSecs + " s");
+				else
+					display.setTime("Time: "+ seconds + "."+ tenSecs  + " s");
+			}
 			if(delta >= 1) {
 				update();
 				render();
 
-				updates++;
 				delta--;
 			}
 
 			if(timer >= 1000000000) {
-			
 				seconds++;
-
-				updates = 0;
 				timer = 0;
 			}
 		}
@@ -145,27 +137,29 @@ public class Game implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void resetGame() {
+
+		dialogOpen = false;
 		display.getFrame().removeKeyListener(keyManager);
 		display.getCanvas().removeKeyListener(keyManager);
-		
+
 		init(mazeSize);
 		seconds = 0;
 	}
-	
-	public int getSeconds() {
-		return seconds;
+
+	public String getSeconds() {
+		return seconds + "." + tenSecs;
 	}
 
 	public GameState getGameState() {
 		return gameState;
 	}
-	
+
 	public Player getPlayer() {
 		return gameState.getPlayer();
 	}
-	
+
 	public MouseManager getMouseManager() {
 		return mouseManager;
 	}
