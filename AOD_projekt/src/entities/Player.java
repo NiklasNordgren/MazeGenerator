@@ -12,7 +12,7 @@ import game.Game;
 
 /**
  * The {@code Player} class. Paints the player represented as a filled dark gray circle to the screen.
- * Contains methods to move the player on the screen, check if the goalcell is reached, show the path
+ * Contains methods to move the player on the screen, check if the goal cell is reached, show the path
  * that leads to the goal cell and reset the game.
  * 
  * @author Hanna Medén, Niklas Nordgren
@@ -34,12 +34,13 @@ public class Player {
 	/**
 	 * Instantiates a new player object.
 	 * 
-	 * Sets this instance game object variable to the incoming {@code game} object.
+	 * Sets this instance game object variable to the parameter {@code game} object.
 	 * 
-	 * Initializes the top left x and y coordinates where the player is to be displayed onto the screen.
+	 * Initializes the top left x and y coordinates where the player is to be displayed onto the
+	 * {@code Canvas} object provided by the {@code Display} class.
 	 * 
 	 * Initializes the currentCell object variable to the first {@code Cell} 
-	 * in the two-dimensional {@code Cell} array provided by the {@code Maze} class.
+	 * in the two dimensional {@code Cell} array provided by the {@code Maze} class.
 	 * 
 	 * @param game the {@code Game} object
 	 */
@@ -54,7 +55,7 @@ public class Player {
 
 	/**
 	 * This method is currently not being used. May be used to update variables of the {@code Player} class.
-	 * This Method gets called upon 60 times per second by the Game class implicitly through the {@code GameState} class.
+	 * Update gets called upon 60 times per second by the {@code Game} class implicitly through the {@code GameState} class.
 	 */
 	public void update() {
 
