@@ -6,17 +6,21 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
-import game.Game;
-
+/**
+ * 
+ * The {@code Maze} class. Creates the maze, finds the path through the maze, and is also able to draw the path onto the screen.
+ * The algorithm used to create the maze is called recursive backtracking.
+ * 
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-06
+ */
 public class Maze {
 
 	public static Cell[][] cells;
 
-	private Cell currentCell;
 	private Cell nextCell;
-
-	private Cell goalCell;
 	private Cell startCell;
+	private Cell goalCell;
 
 	private Stack<Cell> stack;
 
@@ -29,6 +33,13 @@ public class Maze {
 
 	private boolean goalIsFound;
 
+	/**
+	 * Instantiates a new {@code Maze} object.
+	 * 
+	 * Initializes the Integer variables {@code mazeWidth} and {@code mazeHeight} to the value of the {@code size} parameter.
+	 *
+	 * @param size the width and height two dimensional Cell array created within the {@code Maze} object
+	 */
 	public Maze(int size) {
 
 		mazeWidth = size;
@@ -38,6 +49,9 @@ public class Maze {
 
 	}
 
+	/**
+	 * Initializes the objects used by the {@code Maze} object.
+	 */
 	private void init() {
 
 		random = new Random();
@@ -46,13 +60,16 @@ public class Maze {
 
 		stack = new Stack<Cell>();
 
-		startCell = cells[cells.length-1][cells[0].length-1];
+		goalCell = cells[cells.length-1][cells[0].length-1];
 
-		goalCell = cells[0][0];
+		startCell = cells[0][0];
 
-		createMaze(startCell);
+		createMaze(goalCell);
 	}
 
+	/**
+	 * Initialize the two dimensional {@code Cell} array cells.
+	 */
 	private void initializeCells() {
 
 		cells = new Cell[mazeWidth][mazeHeight];
@@ -63,14 +80,18 @@ public class Maze {
 
 	}
 
+	/**
+	 * Creates the maze using the recursive backtracking algorithm.
+	 *
+	 * @param currentCell the current cell
+	 */
 	private void createMaze(Cell currentCell) {
 
 		if(isAllVisited())
 			return;
-		if(currentCell.equals(goalCell) && !goalIsFound)
+		if(currentCell.equals(startCell) && !goalIsFound)
 			goalIsFound = true;
 
-		this.currentCell = currentCell;
 		currentCell.setVisited(true);
 		neighbours = findNeighbours(currentCell);
 
@@ -92,6 +113,11 @@ public class Maze {
 
 	}
 
+	/**
+	 * Checks if is all {@code Cell} objects in the two dimensional {@code Cell} array cells has been visited.
+	 *
+	 * @return true, if is all are visited, false otherwise
+	 */
 	private boolean isAllVisited() {
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++)
@@ -101,36 +127,48 @@ public class Maze {
 	}
 
 
-	private void removeWallBetween(Cell cc, Cell nc) {
+	/**
+	 * Removes the wall between two {@code Cell} objects.
+	 *
+	 * @param currentCell
+	 * @param nextCell
+	 */
+	private void removeWallBetween(Cell currentCell, Cell nextCell) {
 
-		int ccX = cc.getX();
-		int ccY = cc.getY();
+		int currentCellX = currentCell.getX();
+		int currentCellY = currentCell.getY();
 
-		int ncX = nc.getX();
-		int ncY = nc.getY();
+		int nextCellX = nextCell.getX();
+		int nextCellY = nextCell.getY();
 
-		if(ccY - ncY == 1) {
-			cc.walls[0] = 0;
-			nc.walls[1] = 0;
+		if(currentCellY - nextCellY == 1) {
+			currentCell.walls[0] = 0;
+			nextCell.walls[1] = 0;
 		}
 
-		if(ccY - ncY == -1) {
-			cc.walls[1] = 0;
-			nc.walls[0] = 0;
+		if(currentCellY - nextCellY == -1) {
+			currentCell.walls[1] = 0;
+			nextCell.walls[0] = 0;
 		}
 
-		if(ccX - ncX == 1) {
-			cc.walls[2] = 0;
-			nc.walls[3] = 0;
+		if(currentCellX - nextCellX == 1) {
+			currentCell.walls[2] = 0;
+			nextCell.walls[3] = 0;
 		}
 
-		if(ccX - ncX == -1) {
-			cc.walls[3] = 0;
-			nc.walls[2] = 0;
+		if(currentCellX - nextCellX == -1) {
+			currentCell.walls[3] = 0;
+			nextCell.walls[2] = 0;
 		}
-
 	}
 
+	/**
+	 * Finds the neighbours of the current cell that are not visited or out of bounds and adds them to an {@code ArrayList} holding 
+	 * {@code Cell} objects.
+	 * 
+	 * @param currentCell
+	 * @return the array list of {@code Cell} objects 
+	 */
 	private ArrayList<Cell> findNeighbours(Cell currentCell) {
 
 		ArrayList<Cell> neighbours = new ArrayList<Cell>();
@@ -158,11 +196,16 @@ public class Maze {
 			if(!east.getIsVisited())
 				neighbours.add(east);
 		}
-
 		return neighbours;
-
 	}
 
+	/**
+	 * Selects a random neighbour from the incoming neighbours {@code ArrayList} holding 
+	 * {@code Cell} objects.
+	 *
+	 * @param neighbours the neighbours of the current cell
+	 * @return a random cell chosen from the neighbours {@code ArrayList}
+	 */
 	private Cell selectRandomNeighbour(ArrayList<Cell> neighbours) {
 
 		Cell randomCell = neighbours.get(random.nextInt(neighbours.size()));
@@ -171,11 +214,17 @@ public class Maze {
 
 	}
 
+	/**
+	 * This method is currently not being used. May be used to update variables of the {@code Maze} class.
+	 * This Method gets called upon 60 times per second by the Game class implicitly.
+	 */
 	public void update() {
 
 	}
-
-
+	/**
+	 * This method is to draw out the solution path. Starting from the startcell, ending at the goalcell.
+	 * @param g
+	 */
 	public void drawSolutionPath(Graphics g) {
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++) {
@@ -186,11 +235,16 @@ public class Maze {
 			}
 	}
 
-
+	/**
+	 * Is responsible for rendering graphics related to the {@code Maze} class implicitly to the {@code Canvas} object
+	 * provided by the {@code Display} class. Draws the walls of each {@code Cell} object in the two dimensional array cells.
+	 * Aswell as the start- and goal cell of the maze.
+	 * 
+	 * @param g the Graphics object
+	 */
 	public void render(Graphics g) {
 
 		try {
-
 			//Draw walls
 			for(int x = 0; x < cells.length; x++)
 				for(int y = 0; y < cells[x].length; y++) {
@@ -198,7 +252,6 @@ public class Maze {
 					try {
 						cells[x][y].drawWalls(g);
 					}catch(NullPointerException e) {
-
 
 					}
 				}
@@ -209,7 +262,6 @@ public class Maze {
 
 		//Fill goal
 		g.setColor(Color.GREEN);
-		startCell.fillCell(g);
-
+		goalCell.fillCell(g);
 	}
 }
