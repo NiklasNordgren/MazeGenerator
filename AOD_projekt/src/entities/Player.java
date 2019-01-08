@@ -51,7 +51,6 @@ public class Player {
 
 		currentCell = Maze.cells[0][0];
 	}
-	
 
 	/**
 	 * This method is currently not being used. May be used to update variables of the {@code Player} class.
@@ -121,7 +120,6 @@ public class Player {
 			currentCell = Maze.cells[currentCell.getX()][currentCell.getY()-1];
 		}
 	}
-
 	/**
 	 * Moves the player one cell to the right.
 	 */
@@ -160,14 +158,16 @@ public class Player {
 	 * 
 	 */
 	public void checkIfGoalIsReached() {
+
 		if(currentCell == Maze.cells[Maze.cells.length-1][Maze.cells[0].length-1]) {
-		
+
+			game.dialogOpen = true;
 			JDialog dialog = new JDialog();
 			
 			if(cheat)
-				JOptionPane.showMessageDialog(dialog, "No Winner for you, cheating cheater\nMaze completed in: " + game.getSeconds() + " s");
+				JOptionPane.showMessageDialog(dialog, "You've reached the goal but you've achieved this through cheating. \nMaze completed in: " + game.getSeconds() + " s");
 			else
-				JOptionPane.showMessageDialog(dialog, "Winner winner chicken dinner!\nMaze completed in: " + game.getSeconds() + " s");
+				JOptionPane.showMessageDialog(dialog, "Congratulations! You've done it! \nMaze completed in: " + game.getSeconds() + " s");
 			game.resetGame();
 		}	
 	}

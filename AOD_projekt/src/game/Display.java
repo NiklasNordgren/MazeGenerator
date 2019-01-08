@@ -10,7 +10,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -34,9 +33,9 @@ public class Display {
 	private JButton buttonCreateMap, buttonReset, buttonShowPath;
 
 	private JPanel panel;
-	
+
 	private Dimension dimensionButton;
-	
+
 	private JRadioButton radioButton1, radioButton2, radioButton3;
 
 	public static int width = 1200, height = 900;
@@ -106,7 +105,7 @@ public class Display {
 		c.gridy = 0;
 		secondsLabel = new JLabel("Time: 0.0");
 		secondsLabel.setFont(new Font("Arial",Font.BOLD, 55));
-		
+
 		panel.add(secondsLabel, c);
 		c.gridy++;
 
@@ -115,20 +114,21 @@ public class Display {
 		c.gridy++;
 		panel.add(buttonShowPath, c);
 
-		radioButton1 = new JRadioButton("27 x 27");
-		radioButton1.setBackground(Color.WHITE);
-		radioButton1.setActionCommand("27 x 27");
-		radioButton1.setFocusable(false);
-		
-		radioButton2 = new JRadioButton("17 x 17");
-		radioButton2.setBackground(Color.WHITE);
-		radioButton2.setActionCommand("17 x 17");
-		radioButton2.setFocusable(false);
-		
 		radioButton3 = new JRadioButton("7 x 7");
 		radioButton3.setBackground(Color.WHITE);
 		radioButton3.setActionCommand("7 x 7");
 		radioButton3.setFocusable(false);
+		radioButton3.setSelected(true);
+
+		radioButton2 = new JRadioButton("17 x 17");
+		radioButton2.setBackground(Color.WHITE);
+		radioButton2.setActionCommand("17 x 17");
+		radioButton2.setFocusable(false);
+
+		radioButton1 = new JRadioButton("27 x 27");
+		radioButton1.setBackground(Color.WHITE);
+		radioButton1.setActionCommand("27 x 27");
+		radioButton1.setFocusable(false);
 
 		ButtonGroup group = new ButtonGroup();
 		group.add(radioButton1);
@@ -139,13 +139,13 @@ public class Display {
 		panel.add(new JLabel("Maze size:"), c);
 
 		c.gridy++;
-		panel.add(radioButton1, c);
+		panel.add(radioButton3, c);
 
 		c.gridy++;
 		panel.add(radioButton2, c);
 
 		c.gridy++;
-		panel.add(radioButton3, c);
+		panel.add(radioButton1, c);
 
 		buttonCreateMap = new JButton("Create new maze");
 		buttonCreateMap.setFocusable(false);
@@ -154,9 +154,9 @@ public class Display {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String actionCommand = group.getSelection().getActionCommand();
-			
+
 				if(actionCommand.equals("27 x 27")) {
 					game.setMazeSize(27);
 					game.resetGame();

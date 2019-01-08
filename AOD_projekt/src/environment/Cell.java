@@ -1,5 +1,4 @@
 package environment;
-
 import java.awt.Graphics;
 
 import game.Display;

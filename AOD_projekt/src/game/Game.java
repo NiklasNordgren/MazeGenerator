@@ -8,7 +8,6 @@ import states.GameState;
 import states.State;
 
 /**
- * 
  * The {@code Game} class. Instansiates objects of all the classes that are components of the maze game.
  * 
  * Implements the Runnable Interface, which enables the instances of the class to be executed by a thread.
@@ -20,6 +19,7 @@ public class Game implements Runnable {
 
 	private Thread thread;
 	private boolean running;
+	public boolean dialogOpen;
 
 	private Display display;
 
@@ -29,10 +29,10 @@ public class Game implements Runnable {
 	private Graphics g;
 
 	private GameState gameState;
-	
+
 	private int seconds, tenSecs;
 
-	private int mazeSize = 27;
+	private int mazeSize = 7;
 
 	/**
 	 * Instantiates a new {@code Game} object.
@@ -41,9 +41,9 @@ public class Game implements Runnable {
 	 * 
 	 */
 	public Game() {
-		
+
 		display = new Display(this);
-		
+
 		init(mazeSize);
 
 	}
@@ -56,6 +56,7 @@ public class Game implements Runnable {
 	private void init(int mazeSize) {
 
 		gameState = new GameState(this, mazeSize);
+
 		keyManager = new KeyManager(gameState.getPlayer());
 		State.setState(gameState);
 
@@ -74,7 +75,6 @@ public class Game implements Runnable {
 
 		if(State.getState() != null)
 			State.getState().update();
-
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class Game implements Runnable {
 		long now;
 		long lastTime = System.nanoTime();
 		long timer = 0;
-	
+
 		seconds = 0;
 
 		while(running) {
@@ -129,12 +129,13 @@ public class Game implements Runnable {
 			lastTime = now;
 			tenSecs = (int) (timer / 100000000);
 			int minutes = seconds/60;
-			
-			if(minutes > 0) {
-				display.setTime("Time: " + minutes + " m " + seconds % 60 + "." + tenSecs + " s");
-			}else
-				display.setTime("Time: "+ seconds + "."+ tenSecs  + " s");
 
+			if(!dialogOpen) {
+				if(minutes > 0)
+					display.setTime("Time: " + minutes + " m " + seconds % 60 + "." + tenSecs + " s");
+				else
+					display.setTime("Time: "+ seconds + "."+ tenSecs  + " s");
+			}
 			if(delta >= 1) {
 				update();
 				render();
@@ -143,9 +144,7 @@ public class Game implements Runnable {
 			}
 
 			if(timer >= 1000000000) {
-
 				seconds++;
-
 				timer = 0;
 			}
 		}
@@ -184,20 +183,21 @@ public class Game implements Runnable {
 	 * Resets the game by calling the init method and resetting the seconds variable to 0.
 	 */
 	public void resetGame() {
+
+		dialogOpen = false;
 		display.getFrame().removeKeyListener(keyManager);
 		display.getCanvas().removeKeyListener(keyManager);
-		
+
 		init(mazeSize);
 		seconds = 0;
 	}
-	
 	/**
 	 * Gets the seconds.
 	 *
 	 * @return the seconds
 	 */
-	public int getSeconds() {
-		return seconds;
+	public String getSeconds() {
+		return seconds + "." + tenSecs;
 	}
 
 	/**
