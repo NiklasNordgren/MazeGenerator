@@ -22,15 +22,14 @@ public class Display {
 
 	private JFrame frame;
 	private Canvas canvas;
-
 	private JLabel secondsLabel;
 
 	private JButton buttonCreateMap, buttonReset, buttonShowPath;
+
 	private JPanel panel;
 	
 	private Dimension dimensionButton;
 	
-
 	private JRadioButton radioButton1, radioButton2, radioButton3;
 
 	public static int width = 1200, height = 900;
@@ -84,7 +83,9 @@ public class Display {
 		panel.setFocusable(false);
 
 		c.insets = new Insets(10, 10, 10, 10);
+
 		c.anchor = GridBagConstraints.CENTER;
+
 
 		c.gridx = 0;
 		c.gridy = 0;
@@ -92,9 +93,6 @@ public class Display {
 		secondsLabel.setFont(new Font("Arial",Font.BOLD, 55));
 		
 		panel.add(secondsLabel, c);
-		c.gridy++;
-	
-
 		c.gridy++;
 
 		panel.add(buttonReset, c);
@@ -155,9 +153,7 @@ public class Display {
 				else if(actionCommand.equals("7 x 7")) {
 					game.setMazeSize(7);
 					game.resetGame();
-					
 				}
-					
 			}
 		});
 

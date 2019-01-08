@@ -201,10 +201,9 @@ public class Maze {
 
 
 					}
-					
 				}
-			
-			}catch(ArrayIndexOutOfBoundsException e) {
+
+		}catch(ArrayIndexOutOfBoundsException e) {
 
 		}
 
@@ -212,13 +211,5 @@ public class Maze {
 		g.setColor(Color.GREEN);
 		startCell.fillCell(g);
 
-		//Fill start
-		g.setColor(Color.blue);
-		goalCell.fillCell(g);
-
 	}
-
-
-
 }
-

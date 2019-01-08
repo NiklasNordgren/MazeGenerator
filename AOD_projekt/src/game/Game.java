@@ -26,7 +26,7 @@ public class Game implements Runnable {
 	private GameState gameState;
 	private MenuState menuState;
 	
-	private int seconds, tenSecs, hundredSecs;
+	private int seconds, tenSecs;
 
 	private int mazeSize = 27;
 
@@ -44,9 +44,6 @@ public class Game implements Runnable {
 		gameState = new GameState(this, mazeSize);
 		
 		keyManager = new KeyManager(gameState.getPlayer());
-
-		//mouseManager = new MouseManager();		
-
 		State.setState(gameState);
 		//State.setState(menuState);
 		
