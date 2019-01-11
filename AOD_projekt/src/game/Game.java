@@ -132,9 +132,9 @@ public class Game implements Runnable {
 
 			if(!dialogOpen) {
 				if(minutes > 0)
-					display.setTime("Time: " + minutes + " m " + seconds % 60 + "." + tenSecs + " s");
+					display.setTime("<html>Time: <br/>  " + minutes + " m " + seconds % 60 + "." + tenSecs + " s</html>");
 				else
-					display.setTime("Time: "+ seconds + "."+ tenSecs  + " s");
+					display.setTime("<html>Time: <br/>  " + seconds + "."+ tenSecs  + " s</html>");
 			}
 			if(delta >= 1) {
 				update();
