@@ -251,11 +251,6 @@ public class Maze {
 		//Fill goal
 		g.setColor(Color.GREEN);
 		goalCell.fillCell(g);
-
-		//Fill start
-		g.setColor(Color.blue);
-		startCell.fillCell(g);
-
 	}
 
 }
